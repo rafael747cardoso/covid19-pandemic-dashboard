@@ -10,6 +10,7 @@ path_figs = "figs/"
 # Modules:
 import numpy as np
 import pandas as pd
+from datetime import datetime
 import datatable as dt
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, to_hex
@@ -20,6 +21,8 @@ from dash import Dash, dcc, html, dash_table, Input, Output, State
 import dash_bootstrap_components as dbc
 import base64
 from scipy.stats import skew
+
+from funcs.get_data import get_data
 from funcs.content_page_home import content_page_home
 from funcs.content_page_table import content_page_table
 from funcs.content_page_plots import content_page_plots
@@ -30,10 +33,14 @@ pd.set_option("display.max_columns", 300)
 pd.set_option("display.max_rows", 300)
 
 #----------------------------------------------------------------------------------------------------------------------
-#################################################### Data #############################################################
+#################################################### ETL ##############################################################
 
-# Bullet proff data collection:
-df = pd.read_csv("https://covid.ourworldindata.org/data/owid-covid-data.csv")
+# Data extraction from source:
+df = get_data()
+
+
+
+
 
 
 

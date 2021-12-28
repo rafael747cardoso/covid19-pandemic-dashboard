@@ -3,9 +3,12 @@
 
 app link
 
-description
+A dashboard to show the Covid-19 pandemic evolution over the world.
 
-data sources
+## Data source
+
+https://github.com/owid/covid-19-data/tree/master/public/data/
+
 
 ## Figures:
 
