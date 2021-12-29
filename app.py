@@ -68,7 +68,7 @@ server = app.server
 # Images for logo and tabs:
 logo_filename = "dash_logo.png"
 logo_image = base64.b64encode(open(logo_filename, "rb").read())
-home_tab_filename = "home_tab.png"
+home_tab_filename = "world_icon.png"
 home_tab_image = base64.b64encode(open(home_tab_filename, "rb").read())
 table_tab_filename = "table_tab.png"
 table_tab_image = base64.b64encode(open(table_tab_filename, "rb").read())
