@@ -13,7 +13,7 @@ def content_page_continent(
             [
                 "asdasd"
             ],
-            className = "plots-page"
+            className = "generic-page"
         )
     ]
 

@@ -13,7 +13,7 @@ def content_page_map(
             [
                 "sdfsdfdf"
             ],
-            className = "table-page"
+            className = "generic-page"
         )
     ]
     

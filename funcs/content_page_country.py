@@ -50,7 +50,7 @@ def content_page_country(
                 
                 
             ],
-            className = "table-page"
+            className = "generic-page"
         )
     ]
     

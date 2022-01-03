@@ -2,7 +2,6 @@
 
 from dash import html
 import dash_bootstrap_components as dbc
-import base64
 
 
 def content_page_world():
@@ -15,7 +14,7 @@ def content_page_world():
             [
                 "dfsdfdsf"
             ],
-            className = "welcome-page"
+            className = "generic-page"
         )
     ]
     
