@@ -21,11 +21,13 @@ from dash import Dash, dcc, html, dash_table, Input, Output, State
 import dash_bootstrap_components as dbc
 import base64
 from scipy.stats import skew
+import re
 
 from funcs.get_data import get_data
-from funcs.content_page_home import content_page_home
-from funcs.content_page_table import content_page_table
-from funcs.content_page_plots import content_page_plots
+from funcs.content_page_world import content_page_world
+from funcs.content_page_continent import content_page_continent
+from funcs.content_page_country import content_page_country
+from funcs.content_page_map import content_page_map
 
 # Display options:
 pd.set_option("display.width", 1200)
@@ -39,8 +41,11 @@ pd.set_option("display.max_rows", 300)
 df = get_data()
 
 
-
-
+# Selects's options:
+df_countries = df[df["iso_code"].str.contains("OWID") == False]
+country_names = df_countries["location"].unique().tolist()
+country_codes = df_countries["iso_code"].unique().tolist()
+opts_countries = [{"label": country_names[i], "value": country_codes[i]} for i in range(len(country_names))]
 
 
 
@@ -65,15 +70,13 @@ server = app.server
 #----------------------------------------------------------------------------------------------------------------------
 ################################################## Frontend ###########################################################
 
-# Images for logo and tabs:
-logo_filename = "dash_logo.png"
-logo_image = base64.b64encode(open(logo_filename, "rb").read())
-home_tab_filename = "world_icon.png"
-home_tab_image = base64.b64encode(open(home_tab_filename, "rb").read())
-table_tab_filename = "table_tab.png"
-table_tab_image = base64.b64encode(open(table_tab_filename, "rb").read())
-plots_tab_filename = "plots_tab.png"
-plots_tab_image = base64.b64encode(open(plots_tab_filename, "rb").read())
+# Load the icons:
+icons = "figs/icons/"
+icon_logo = base64.b64encode(open(icons + "icon_logo.png", "rb").read())
+icon_world = base64.b64encode(open(icons + "icon_world.png", "rb").read())
+icon_continent = base64.b64encode(open(icons + "icon_continent.png", "rb").read())
+icon_country = base64.b64encode(open(icons + "icon_country.png", "rb").read())
+icon_map = base64.b64encode(open(icons + "icon_map.png", "rb").read())
 
 # Top navbar:
 top_navbar = dbc.Navbar(
@@ -84,10 +87,20 @@ top_navbar = dbc.Navbar(
                 dbc.Row(
                     [
                         dbc.Col(
-                            html.Img(
-                                src = "data:image/png;base64,{}".format(logo_image.decode()),
-                                height = "60px"
-                            )
+                            [
+                                dbc.Row(
+                                    [
+                                        html.Img(
+                                            src = "data:image/png;base64,{}".format(icon_logo.decode()),
+                                            height = "100px"
+                                        ),
+                                        html.H2(
+                                            "Covid-19 Evolution",
+                                            style = {"padding-top": "25px"}
+                                        )
+                                    ]
+                                )
+                            ]
                         )
                     ]
                 )
@@ -95,19 +108,19 @@ top_navbar = dbc.Navbar(
             # Main navbar:
             dbc.Nav(
                 [
-                    # Home:
+                    # Page World:
                     dbc.NavItem(
                         dbc.Card(
                             [
                                 dbc.CardImg(
-                                    src = "data:image/png;base64,{}".format(home_tab_image.decode()),
+                                    src = "data:image/png;base64,{}".format(icon_world.decode()),
                                     top = True,
                                     class_name = "tab-icon"
                                 ),
                                 dbc.CardBody(
                                     dbc.NavLink(
-                                        "Home",
-                                        href = "/",
+                                        "World",
+                                        href = "/page_world",
                                         active = "exact"
                                     ),
                                     class_name = "card-tab-body"
@@ -116,19 +129,19 @@ top_navbar = dbc.Navbar(
                             class_name = "card-tab-icon"
                         )
                     ),
-                    # Table:
+                    # Page Continent:
                     dbc.NavItem(
                         dbc.Card(
                             [
                                 dbc.CardImg(
-                                    src = "data:image/png;base64,{}".format(table_tab_image.decode()),
+                                    src = "data:image/png;base64,{}".format(icon_continent.decode()),
                                     top = True,
                                     class_name = "tab-icon"
                                 ),
                                 dbc.CardBody(
                                     dbc.NavLink(
-                                        "Table",
-                                        href = "/page_table",
+                                        "Continent",
+                                        href = "/page_continent",
                                         active = "exact"
                                     ),
                                     class_name = "card-tab-body"
@@ -137,19 +150,40 @@ top_navbar = dbc.Navbar(
                             class_name = "card-tab-icon"
                         )
                     ),
-                    # Plots:
+                    # Page Country:
                     dbc.NavItem(
                         dbc.Card(
                             [
                                 dbc.CardImg(
-                                    src = "data:image/png;base64,{}".format(plots_tab_image.decode()),
+                                    src = "data:image/png;base64,{}".format(icon_country.decode()),
                                     top = True,
                                     class_name = "tab-icon"
                                 ),
                                 dbc.CardBody(
                                     dbc.NavLink(
-                                        "Plots",
-                                        href = "/page_plots",
+                                        "Country",
+                                        href = "/page_country",
+                                        active = "exact"
+                                    ),
+                                    class_name = "card-tab-body"
+                                )
+                            ],
+                            class_name = "card-tab-icon"
+                        )
+                    ),
+                    # Page Map:
+                    dbc.NavItem(
+                        dbc.Card(
+                            [
+                                dbc.CardImg(
+                                    src = "data:image/png;base64,{}".format(icon_map.decode()),
+                                    top = True,
+                                    class_name = "tab-icon"
+                                ),
+                                dbc.CardBody(
+                                    dbc.NavLink(
+                                        "Map",
+                                        href = "/page_map",
                                         active = "exact"
                                     ),
                                     class_name = "card-tab-body"
@@ -188,11 +222,15 @@ app.layout = html.Div(
 )
 def render_page_content(pathname):
     if pathname == "/":
-        return content_page_home()
-    elif pathname == "/page_table":
-        return content_page_table()
-    elif pathname == "/page_plots":
-        return content_page_plots()
+        return content_page_world()
+    elif pathname == "/page_world":
+        return content_page_world()
+    elif pathname == "/page_continent":
+        return content_page_continent()
+    elif pathname == "/page_country":
+        return content_page_country(opts_countries = opts_countries)
+    elif pathname == "/page_map":
+        return content_page_map()
 
 
 #----------------------------------------------------------------------------------------------------------------------

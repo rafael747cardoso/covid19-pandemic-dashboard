@@ -11490,75 +11490,18 @@ a.text-dark:hover, a.text-dark:focus {
     padding-top: 0px;
 }
 
-/************************************************** Home *************************************************************/
+/************************************************** Navtabs **********************************************************/
 
-.welcome-page {
-    background-color: #0d0629;
-    text-align: center;
-    font-size: 50px;
-    font-weight: 900;
-    color: red;
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+	color: #fff;
+	background-color: #6e56d0;
+	border-color: #6749e3 #826be1 #f4070700;
 }
 
-.welcome-text {
-    font-size: 26px;
-    font-family: Helvetica, sans-serif;
-    font-style: normal;    
-    text-align: center;
-    color: #D9DB2D;
-    padding-left: 3vw;
-    padding-right: 3vw;
-    padding-top: 20px;
-    padding-bottom: 15px;
-    text-align: justify;
-    text-justify: inter-word;
+.nav-tabs {
+	border-bottom: 2px solid #8b3bce5e;
 }
-
-.welcome-note {
-	font-size: 24px;
-    font-family: Helvetica, sans-serif;
-    font-style: normal;    
-	text-align: left;
-	color: #D9DB2D;
-    padding-left: 3vw;
-    padding-top: 20px;
-}
-
-.welcome-link {
-	font-size: 24px;
-    font-family: Helvetica, sans-serif;
-    font-style: normal;    
-	text-align: center;
-	color: white;
-    padding-left: 3vw;
-    
-}
-
-.welcome-pic {
-    height: 29vw;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-/************************************************** Table ************************************************************/
-
-.table-page {
-    background-color: #0d0629;
-}
-
-.table-data {
-    margin-right: 1vw;
-    margin-left: 1vw;
-}
-.previous-next-container .first-page,
-.previous-next-container .previous-page,
-.previous-next-container .page-number,
-.previous-next-container .next-page,
-.previous-next-container .last-page {
-    background-color: #1d1832;
-    color: white;
-}
-
 
 
 /************************************************** Buttons **********************************************************/
@@ -11621,59 +11564,9 @@ input, select {
     padding-bottom: 15px;
 }
 
-.card-summary {
-    
-}
-
-/************************************************** Plots ************************************************************/
-
-.plots-page {
-    background-color: #0d0629;
-}
-
-.tabs-row-plots {
-    font-size: 20px;
-    font-weight: 800;
-    font-family: Helvetica, sans-serif;
-    margin-left: 15px;
-    margin-right: 15px;
-}
-
-.tab-plot {
-    
-}
-
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-item.show .nav-link {
-	color: #fff;
-	background-color: #6e56d0;
-	border-color: #6749e3 #826be1 #f4070700;
-}
-
-.nav-tabs {
-	border-bottom: 2px solid #8b3bce5e;
-}
-
-.plot-row {
-    margin-top: 10px;
-}
-
-.rc-slider-track {
-	background-color: #3768eb;
-}
-.rc-slider-handle {
-	border: solid 2px #b87efd;
-	background-color: #831cfc;
-}
-
-.rc-slider-tooltip-inner {
-	padding-left: 5px;
-	padding-right: 5px;
-	height: 30px;
-	font-size: 16px;
-	color: white;
-	background-color: #831cfc;
-	font-weight: 800;
+/**************************************************** Selects ********************************************************/
+.main-geo-select {
+    margin-left: 2vw;
 }
 
 
