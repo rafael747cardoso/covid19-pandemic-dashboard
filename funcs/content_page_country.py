@@ -14,7 +14,8 @@ def content_page_country(
     pg = [
         html.Div(
             [
-                # Select the country:
+                ### Select the country
+                
                 dbc.Row(
                     [
                         dbc.Col(
@@ -27,7 +28,7 @@ def content_page_country(
                             width = 4
                         )
                     ],
-                    className = "main-geo-select"
+                    className = "main-geo-select-header"
                 ),
                 dbc.Row(
                     [
@@ -42,10 +43,163 @@ def content_page_country(
                             width = 4
                         )
                     ],
-                    className = "main-geo-select"
+                    className = "main-geo-select-body"
                 ),
 
-                # Cards:
+                ### Cards
+                
+                # First row of info cards:
+                dbc.Row(
+                    [
+                        dbc.Col(
+                            [
+                                html.Div(
+                                    [
+                                        html.Div(
+                                            "555",
+                                            className = "card-info-body"
+                                        ),
+                                        html.Div(
+                                            "Total Cases",
+                                            className = "card-info-footer"
+                                        ),
+                                    ],
+                                    className = "card-info"
+                                )
+                            ],
+                            width = 4
+                        ),
+                        dbc.Col(
+                            [
+                                html.Div(
+                                    [
+                                        html.Div(
+                                            "666",
+                                            className = "card-info-body"
+                                        ),
+                                        html.Div(
+                                            "Total Deaths",
+                                            className = "card-info-footer"
+                                        ),
+                                    ],
+                                    className = "card-info"
+                                )
+                            ],
+                            width = 4
+                        ),
+                        dbc.Col(
+                            [
+                                html.Div(
+                                    [
+                                        html.Div(
+                                            "777",
+                                            className = "card-info-body"
+                                        ),
+                                        html.Div(
+                                            "Total Fully Vaccinated",
+                                            className = "card-info-footer"
+                                        ),
+                                    ],
+                                    className = "card-info"
+                                )
+                            ],
+                            width = 4
+                        )
+                    ],
+                    className = "row-cards-info"
+                ),
+                # Second row of info cards:
+                dbc.Row(
+                    [
+                        dbc.Col(
+                            [
+                                html.Div(
+                                    [
+                                        html.Div(
+                                            "888",
+                                            className = "card-info-body"
+                                        ),
+                                        html.Div(
+                                            "New Cases",
+                                            className = "card-info-footer"
+                                        ),
+                                    ],
+                                    className = "card-info"
+                                )
+                            ],
+                            width = 4
+                        ),
+                        dbc.Col(
+                            [
+                                html.Div(
+                                    [
+                                        html.Div(
+                                            "999",
+                                            className = "card-info-body"
+                                        ),
+                                        html.Div(
+                                            "New Deaths",
+                                            className = "card-info-footer"
+                                        ),
+                                    ],
+                                    className = "card-info"
+                                )
+                            ],
+                            width = 4
+                        ),
+                        dbc.Col(
+                            [
+                                html.Div(
+                                    [
+                                        html.Div(
+                                            "222",
+                                            className = "card-info-body"
+                                        ),
+                                        html.Div(
+                                            "Percent of Fully Vaccinated",
+                                            className = "card-info-footer"
+                                        ),
+                                    ],
+                                    className = "card-info"
+                                )
+                            ],
+                            width = 4
+                        )
+                    ],
+                    className = "row-cards-info"
+                ),
+                # Date of last data and source:
+                dbc.Row(
+                    [
+                        dbc.Col(
+                            [
+                                html.Div(
+                                    "Updated in 03/01/2022",
+                                    className = "last-data-date"
+                                ),
+                                html.Div(
+                                    [
+                                        html.Div(
+                                            "Source: ",
+                                            className = "data-source-name"
+                                        ),
+                                        html.A(
+                                            "https://github.com/owid/covid-19-data/tree/master/public/data/",
+                                            href = "https://github.com/owid/covid-19-data/tree/master/public/data/",
+                                            className = "data-source-link"
+                                        )
+                                    ],
+                                    className = "data-source"
+                                )
+                            ],
+                            width = 12
+                        )
+                    ],
+                    className = "last-data-date-and-data-source"
+                )
+                
+                ### Plots
+                
                 
                 
                 

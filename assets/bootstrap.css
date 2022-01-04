@@ -11521,6 +11521,38 @@ html {
 
 /************************************************** Cards ************************************************************/
 
+.row-cards-info {
+    
+}
+
+.card-info {
+    border: 1px solid white;
+}
+
+.card-info-body {
+    
+}
+
+.card-info-footer {
+    
+}
+
+
+.data-source {
+    display: inline-flex;
+}
+
+.data-source-name {
+    margin-right: 1em;
+}
+
+
+/**************************************************** Selects ********************************************************/
+
+.main-geo-select-header, .main-geo-select-body {
+    margin-left: 2vw;
+}
+
 input, select {
 	width: 100%;
 }
@@ -11542,14 +11574,6 @@ input, select {
     color: #0D0337;
 }
 
-.card-container {
-    background-color: #1D1832;
-    border: 2px solid #686379;
-    padding: 20px 2vw;
-    margin: 20px 1vw;
-    border-radius: 15px;
-}
-
 .filter-title {
     text-align: center;
     font-size: 22px;
@@ -11558,13 +11582,6 @@ input, select {
     padding-top: 15px;
     padding-bottom: 15px;
 }
-
-/**************************************************** Selects ********************************************************/
-.main-geo-select {
-    margin-left: 2vw;
-}
-
-
 
 
 
