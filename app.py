@@ -41,11 +41,37 @@ pd.set_option("display.max_rows", 300)
 df = get_data()
 
 
-# Selects's options:
+# Select options:
 df_countries = df[df["iso_code"].str.contains("OWID") == False]
 country_names = df_countries["location"].unique().tolist()
 country_codes = df_countries["iso_code"].unique().tolist()
 opts_countries = [{"label": country_names[i], "value": country_codes[i]} for i in range(len(country_names))]
+opts_var_cases = [
+    {"label": "Total Cases", "value": "cases_total"},
+    {"label": "New Cases", "value": "cases_new"},
+    {"label": "New Cases (smoothed)", "value": "cases_new_smoothed"},
+    {"label": "Total Cases per million", "value": "cases_total_per_million"},
+    {"label": "New Cases per million", "value": "cases_new_per_million"},
+    {"label": "New Cases per million (smoothed)", "value": "cases_new_smoothed_per_million"}
+]
+opts_var_deaths = [
+    {"label": "Total Deaths", "value": "deaths_total"},
+    {"label": "New Deaths", "value": "deaths_new"},
+    {"label": "New Deaths (smoothed)", "value": "deaths_new_smoothed"},
+    {"label": "Total Deaths per million", "value": "deaths_total_per_million"},
+    {"label": "New Deaths per million", "value": "deaths_new_per_million"},
+    {"label": "New Deaths per million (smoothed)", "value": "deaths_new_smoothed_per_million"}
+]
+opts_var_vaccinated = [
+    {"label": "Vaccinated", "value": "vaccinated"},
+    {"label": "Fully Vaccinated", "value": "vaccinated_fully"},
+    {"label": "Percent of Vaccinated", "value": "vaccinated_pct"},
+    {"label": "Percent of Fully Vaccinated", "value": "vaccinated_fully_pct"}
+]
+opts_scales = [
+    {"label": "Linear", "value": "linear"},
+    {"label": "Log10", "value": "log10"}
+]
 
 
 
@@ -228,7 +254,11 @@ def render_page_content(pathname):
     elif pathname == "/page_continent":
         return content_page_continent()
     elif pathname == "/page_country":
-        return content_page_country(opts_countries = opts_countries)
+        return content_page_country(opts_countries = opts_countries,
+                                    opts_var_cases = opts_var_cases,
+                                    opts_var_deaths = opts_var_deaths,
+                                    opts_var_vaccinated = opts_var_vaccinated,
+                                    opts_scales = opts_scales)
     elif pathname == "/page_map":
         return content_page_map()
 
