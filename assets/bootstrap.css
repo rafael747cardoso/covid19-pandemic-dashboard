@@ -11521,22 +11521,30 @@ html {
 
 /************************************************** Cards ************************************************************/
 
-.row-cards-info {
-    
+.row-cards-info.row {
+    margin: 30px 0px; 
 }
 
 .card-info {
-    border: 1px solid white;
+    border: 1px solid #2B2544;
+    border-radius: 10px;
+    background-color: #2B2544;
+    padding: 15px 5px;
+    color: white;
+    text-align: center;
 }
 
 .card-info-body {
-    
+    font-size: 35px;
+    font-weight: 700;
+    padding: 10px 5px;
 }
 
 .card-info-footer {
-    
+    font-size: 20px;
+    font-weight: 500;    
+    padding: 5px 5px;
 }
-
 
 .data-source {
     display: inline-flex;
@@ -11544,6 +11552,11 @@ html {
 
 .data-source-name {
     margin-right: 1em;
+}
+
+.last-data-date-and-data-source {
+    margin-left: 1vw;
+    font-size: 16px;    
 }
 
 

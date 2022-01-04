@@ -56,7 +56,7 @@ def content_page_country(
                                 html.Div(
                                     [
                                         html.Div(
-                                            "555",
+                                            "100000000",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
@@ -74,7 +74,7 @@ def content_page_country(
                                 html.Div(
                                     [
                                         html.Div(
-                                            "666",
+                                            "10000000",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
@@ -92,7 +92,7 @@ def content_page_country(
                                 html.Div(
                                     [
                                         html.Div(
-                                            "777",
+                                            "2000000000",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
@@ -116,7 +116,7 @@ def content_page_country(
                                 html.Div(
                                     [
                                         html.Div(
-                                            "888",
+                                            "100000",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
@@ -134,7 +134,7 @@ def content_page_country(
                                 html.Div(
                                     [
                                         html.Div(
-                                            "999",
+                                            "10000",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
@@ -152,7 +152,7 @@ def content_page_country(
                                 html.Div(
                                     [
                                         html.Div(
-                                            "222",
+                                            "42" + " %",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
@@ -199,6 +199,7 @@ def content_page_country(
                 )
                 
                 ### Plots
+                
                 
                 
                 
