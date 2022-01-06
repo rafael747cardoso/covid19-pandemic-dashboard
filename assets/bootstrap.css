@@ -11489,15 +11489,32 @@ html {
 	color: #fff;
 	background-color: #6e56d0;
 	border-color: #6749e3 #826be1 #f4070700;
+	margin-left: 1vw
 }
 
 .nav-tabs {
-	border-bottom: 2px solid #8b3bce5e;
+	border-bottom: 2px solid #8b3bce5e;;
+	font-size: 20px;
+	font-weight: 700;
 }
 
 .generic-page {
     background-color: #0D0629;
 }
+
+.row-time-series.row {
+    margin: 1vw 2vw;
+}
+
+.row-trajectories.row {
+    margin: 1vw 2vw;
+}
+
+
+
+
+
+
 
 /************************************************** Buttons **********************************************************/
 
@@ -11522,13 +11539,13 @@ html {
 /************************************************** Cards ************************************************************/
 
 .row-cards-info.row {
-    margin: 30px 0px; 
+    margin: 30px 2vw;
 }
 
 .card-info {
-    border: 1px solid #2B2544;
+    border: 1px solid #423677;
     border-radius: 10px;
-    background-color: #2B2544;
+    background-color: #423677;
     padding: 15px 5px;
     color: white;
     text-align: center;
@@ -11554,42 +11571,48 @@ html {
     margin-right: 1em;
 }
 
-.last-data-date-and-data-source {
-    margin-left: 1vw;
-    font-size: 16px;    
+.last-data-date {
+    font-size: 20px;
+    font-weight: 700;    
+    margin-left: 3vw;
+    margin-bottom: 15px;
 }
 
-.tab-time-series {
-    
-}
-
-.row-time-series {
-    
+.data-source {
+    font-size: 18px;
+    margin-left: 3vw;
+    margin-bottom: 30px;
 }
 
 .card-plot {
-    
+    border: 1px solid #382C63;
+    border-radius: 10px;
+    background-color: #382C63;
+    padding: 15px 5px;
+    color: white;
+    text-align: center;
 }
 
 .card-plot-header {
-    
-}
-
-.card-plot-select-title {
-    
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    font-family: Helvetica, sans-serif;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .card-plot-select {
-    
+    margin-bottom: 1vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
 }
-
-
 
 
 
 /**************************************************** Selects ********************************************************/
 
-.main-geo-select-header, .main-geo-select-body {
+.my-select {
     margin-left: 2vw;
 }
 
@@ -11623,7 +11646,12 @@ input, select {
     padding-bottom: 15px;
 }
 
-
+.radio-check-scale {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
 
 
 

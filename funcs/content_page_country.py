@@ -7,13 +7,17 @@ def content_page_country(
     opts_var_cases,
     opts_var_deaths,
     opts_var_vaccinated,
-    opts_scales
+    opts_scales,
+    opts_var_trajectories,
+    opts_mov_avg_period
 ):
     """
     Make the content for the Country page.
     param opts_countries:
     param opts_var_cases:
     param opts_scales:
+    param opts_var_trajectories:
+    param opts_mov_avg_period:
     return: pg
     """
 
@@ -29,17 +33,7 @@ def content_page_country(
                                 html.Div(
                                     "Choose the country",
                                     className = "filter-title"
-                                )
-                            ],
-                            width = 4
-                        )
-                    ],
-                    className = "main-geo-select-header"
-                ),
-                dbc.Row(
-                    [
-                        dbc.Col(
-                            [
+                                ),
                                 dbc.Select(
                                     id = "chosen_country",
                                     options = opts_countries,
@@ -49,7 +43,7 @@ def content_page_country(
                             width = 4
                         )
                     ],
-                    className = "main-geo-select-body"
+                    className = "my-select"
                 ),
 
                 ### Cards
@@ -225,12 +219,8 @@ def content_page_country(
                                                         html.Div(
                                                             [
                                                                 html.Div(
-                                                                    "Select the variable",
-                                                                    className = "card-plot-select-title"
-                                                                ),
-                                                                html.Div(
                                                                     dbc.Select(
-                                                                        id = "chosen_var_cases_time_series",
+                                                                        id = "chosen_var_country_time_series_cases",
                                                                         options = opts_var_cases,
                                                                         value = opts_var_cases[0]["value"]
                                                                     ),
@@ -238,14 +228,19 @@ def content_page_country(
                                                                 )
                                                             ]
                                                         ),
-                                                        dbc.RadioItems(
-                                                            id = "chosen_scale_cases_time_series",
-                                                            options = opts_scales,
-                                                            value = opts_scales[0]["value"],
-                                                            inline = True
+                                                        html.Div(
+                                                            [
+                                                                dbc.RadioItems(
+                                                                    id = "chosen_scale_country_time_series_cases",
+                                                                    options = opts_scales,
+                                                                    value = opts_scales[0]["value"],
+                                                                    inline = True
+                                                                )
+                                                            ],
+                                                            className = "radio-check-scale"
                                                         ),
                                                         dcc.Graph(
-                                                            id = "plot_time_series_cases",
+                                                            id = "plot_country_time_series_cases",
                                                             figure = {}
                                                         )
                                                     ],
@@ -267,12 +262,8 @@ def content_page_country(
                                                         html.Div(
                                                             [
                                                                 html.Div(
-                                                                    "Select the variable",
-                                                                    className = "card-plot-select-title"
-                                                                ),
-                                                                html.Div(
                                                                     dbc.Select(
-                                                                        id = "chosen_var_deaths_time_series",
+                                                                        id = "chosen_var_country_time_series_deaths",
                                                                         options = opts_var_deaths,
                                                                         value = opts_var_deaths[0]["value"]
                                                                     ),
@@ -280,14 +271,19 @@ def content_page_country(
                                                                 )
                                                             ]
                                                         ),
-                                                        dbc.RadioItems(
-                                                            id = "chosen_scale_deaths_time_series",
-                                                            options = opts_scales,
-                                                            value = opts_scales[0]["value"],
-                                                            inline = True
+                                                        html.Div(
+                                                            [
+                                                                dbc.RadioItems(
+                                                                    id = "chosen_scale_country_time_series_deaths",
+                                                                    options = opts_scales,
+                                                                    value = opts_scales[0]["value"],
+                                                                    inline = True
+                                                                )
+                                                            ],
+                                                            className = "radio-check-scale"
                                                         ),
                                                         dcc.Graph(
-                                                            id = "plot_time_series_deaths",
+                                                            id = "plot_country_time_series_deaths",
                                                             figure = {}
                                                         )
                                                     ],
@@ -309,12 +305,8 @@ def content_page_country(
                                                         html.Div(
                                                             [
                                                                 html.Div(
-                                                                    "Select the variable",
-                                                                    className = "card-plot-select-title"
-                                                                ),
-                                                                html.Div(
                                                                     dbc.Select(
-                                                                        id = "chosen_var_vaccinated_time_series",
+                                                                        id = "chosen_var_country_time_series_vaccinated",
                                                                         options = opts_var_vaccinated,
                                                                         value = opts_var_vaccinated[0]["value"]
                                                                     ),
@@ -322,14 +314,19 @@ def content_page_country(
                                                                 )
                                                             ]
                                                         ),
-                                                        dbc.RadioItems(
-                                                            id = "chosen_scale_vaccinated_time_series",
-                                                            options = opts_scales,
-                                                            value = opts_scales[0]["value"],
-                                                            inline = True
+                                                        html.Div(
+                                                            [
+                                                                dbc.RadioItems(
+                                                                    id = "chosen_scale_country_time_series_vaccinated",
+                                                                    options = opts_scales,
+                                                                    value = opts_scales[0]["value"],
+                                                                    inline = True
+                                                                )
+                                                            ],
+                                                            className = "radio-check-scale"
                                                         ),
                                                         dcc.Graph(
-                                                            id = "plot_time_series_vaccinated",
+                                                            id = "plot_country_time_series_vaccinated",
                                                             figure = {}
                                                         )
                                                     ],
@@ -349,24 +346,97 @@ def content_page_country(
                         # Trajectories:
                         dbc.Tab(
                             [
-                                "dasfsdfsdf"
+                                # Row of filters:
+                                dbc.Row(
+                                    [
+                                        # Variable:
+                                        dbc.Col(
+                                            [
+                                                html.Div(
+                                                    "Variable",
+                                                    className = "filter-title"
+                                                ),
+                                                dbc.Select(
+                                                    id = "chosen_var_country_trajectories",
+                                                    options = opts_var_trajectories,
+                                                    value = opts_var_trajectories[0]["value"]
+                                                )
+                                            ],
+                                            width = 4
+                                        ),
+                                        # Period:
+                                        dbc.Col(
+                                            [
+                                                html.Div(
+                                                    "Moving average period",
+                                                    className = "filter-title"
+                                                ),
+                                                dbc.Select(
+                                                    id = "chosen_var_country_mov_avg_period",
+                                                    options = opts_mov_avg_period,
+                                                    value = opts_mov_avg_period[0]["value"]
+                                                )
+                                            ],
+                                            width = 4
+                                        ),
+                                        # Country:
+                                        dbc.Col(
+                                            [
+                                                html.Div(
+                                                    "Countries",
+                                                    className = "filter-title"
+                                                ),
+                                                dbc.Select(
+                                                    id = "chosen_var_country_countries",
+                                                    options = opts_countries,
+                                                    value = opts_countries[0]["value"]
+                                                )
+                                            ],
+                                            width = 4
+                                        )
+                                    ],
+                                    className = "row-trajectories"
+                                ),
                                 
-                                
-                                
-                                
-                                
-                                
+                                # Trajectory plot:
+                                dbc.Row(
+                                    [
+                                        dbc.Col(
+                                            [
+                                                html.Div(
+                                                    [
+                                                        html.Div(
+                                                            [
+                                                                dbc.RadioItems(
+                                                                    id = "chosen_scale_country_trajectory",
+                                                                    options = opts_scales,
+                                                                    value = opts_scales[0]["value"],
+                                                                    inline = True
+                                                                )
+                                                            ],
+                                                            className = "radio-check-scale"
+                                                        ),
+                                                        dcc.Graph(
+                                                            id = "plot_country_trajectory",
+                                                            figure = {}
+                                                        )
+                                                    ],
+                                                    className = "card-plot"
+                                                )
+                                            ],
+                                            width = 12
+                                        )
+                                    ],
+                                    className = "row-trajectories"
+                                )
+
                             ],
                             label = "Trajectories",
                             className = "tab-trajectories"
                         )
-                        
                     ],
                     className = "tabs-plots"
                 )
-                
-                
-                
             ],
             className = "generic-page"
         )

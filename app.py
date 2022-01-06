@@ -72,7 +72,15 @@ opts_scales = [
     {"label": "Linear", "value": "linear"},
     {"label": "Log10", "value": "log10"}
 ]
-
+opts_var_trajectories = [
+    {"label": "Cases", "value": "trajectory_cases"},
+    {"label": "Deaths", "value": "trajectory_deaths"}
+]
+opts_mov_avg_period = [
+    {"label": "1 day", "value": "mov_avg_period_1_day"},
+    {"label": "1 week", "value": "mov_avg_period_1_week"},
+    {"label": "1 month", "value": "mov_avg_period_1_month"}
+]
 
 
 #----------------------------------------------------------------------------------------------------------------------
@@ -258,7 +266,9 @@ def render_page_content(pathname):
                                     opts_var_cases = opts_var_cases,
                                     opts_var_deaths = opts_var_deaths,
                                     opts_var_vaccinated = opts_var_vaccinated,
-                                    opts_scales = opts_scales)
+                                    opts_scales = opts_scales,
+                                    opts_var_trajectories = opts_var_trajectories,
+                                    opts_mov_avg_period = opts_mov_avg_period)
     elif pathname == "/page_map":
         return content_page_map()
 
