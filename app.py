@@ -96,7 +96,31 @@ server = app.server
 #----------------------------------------------------------------------------------------------------------------------
 #################################################### Backend ##########################################################
 
+# Card total cases:
+@app.callback(
+    Output(component_id = "card_country_total_cases", component_property = "children"),
+    [
+        Input(component_id = "chosen_country", component_property = "value")
+    ]
+)
+def update_card_country_total_cases(country_code):
+    x = df.loc[df["iso_code"] == country_code, "cases_total"].iloc[-1]
+    return(x)
 
+
+
+
+# Last data date:
+@app.callback(
+    Output(component_id = "last_data_date", component_property = "children"),
+    [
+        Input(component_id = "chosen_country", component_property = "value")
+    ]
+)
+def update_last_data_date(country_code):
+    x = df.loc[df["iso_code"] == country_code, "date"].iloc[-1]
+    x = "Updated in " + x
+    return(x)
 
 
 

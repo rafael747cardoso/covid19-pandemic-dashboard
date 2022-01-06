@@ -51,12 +51,14 @@ def content_page_country(
                 # First row of info cards:
                 dbc.Row(
                     [
+                        # Card of total cases:
                         dbc.Col(
                             [
                                 html.Div(
                                     [
                                         html.Div(
-                                            "100000000",
+                                            [],
+                                            id = "card_country_total_cases",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
@@ -69,6 +71,7 @@ def content_page_country(
                             ],
                             width = 4
                         ),
+                        # Card of total deaths:
                         dbc.Col(
                             [
                                 html.Div(
@@ -87,6 +90,7 @@ def content_page_country(
                             ],
                             width = 4
                         ),
+                        # Card of fully vaccinated:
                         dbc.Col(
                             [
                                 html.Div(
@@ -111,6 +115,7 @@ def content_page_country(
                 # Second row of info cards:
                 dbc.Row(
                     [
+                        # Card of new cases:
                         dbc.Col(
                             [
                                 html.Div(
@@ -129,6 +134,7 @@ def content_page_country(
                             ],
                             width = 4
                         ),
+                        # Card of new deaths:
                         dbc.Col(
                             [
                                 html.Div(
@@ -147,6 +153,7 @@ def content_page_country(
                             ],
                             width = 4
                         ),
+                        # Card of percent of fully vaccinated:
                         dbc.Col(
                             [
                                 html.Div(
@@ -174,7 +181,8 @@ def content_page_country(
                         dbc.Col(
                             [
                                 html.Div(
-                                    "Updated in 03/01/2022",
+                                    [],
+                                    id = "last_data_date",
                                     className = "last-data-date"
                                 ),
                                 html.Div(
