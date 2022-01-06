@@ -65,6 +65,11 @@ def content_page_country(
                                             "Total Cases",
                                             className = "card-info-footer"
                                         ),
+                                        html.Div(
+                                            [],
+                                            id = "card_country_total_cases_last_date",
+                                            className = "card-info-footer"
+                                        ),
                                     ],
                                     className = "card-info"
                                 )
@@ -77,11 +82,17 @@ def content_page_country(
                                 html.Div(
                                     [
                                         html.Div(
-                                            "10000000",
+                                            [],
+                                            id = "card_country_total_deaths",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
                                             "Total Deaths",
+                                            className = "card-info-footer"
+                                        ),
+                                        html.Div(
+                                            [],
+                                            id = "card_country_total_deaths_last_date",
                                             className = "card-info-footer"
                                         ),
                                     ],
@@ -96,11 +107,17 @@ def content_page_country(
                                 html.Div(
                                     [
                                         html.Div(
-                                            "2000000000",
+                                            [],
+                                            id = "card_country_fully_vaccinated",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
                                             "Total Fully Vaccinated",
+                                            className = "card-info-footer"
+                                        ),
+                                        html.Div(
+                                            [],
+                                            id = "card_country_fully_vaccinated_last_date",
                                             className = "card-info-footer"
                                         ),
                                     ],
@@ -121,11 +138,17 @@ def content_page_country(
                                 html.Div(
                                     [
                                         html.Div(
-                                            "100000",
+                                            [],
+                                            id = "card_country_new_cases",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
                                             "New Cases",
+                                            className = "card-info-footer"
+                                        ),
+                                        html.Div(
+                                            [],
+                                            id = "card_country_new_cases_last_date",
                                             className = "card-info-footer"
                                         ),
                                     ],
@@ -140,11 +163,17 @@ def content_page_country(
                                 html.Div(
                                     [
                                         html.Div(
-                                            "10000",
+                                            [],
+                                            id = "card_country_new_deaths",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
                                             "New Deaths",
+                                            className = "card-info-footer"
+                                        ),
+                                        html.Div(
+                                            [],
+                                            id = "card_country_new_deaths_last_date",
                                             className = "card-info-footer"
                                         ),
                                     ],
@@ -159,11 +188,17 @@ def content_page_country(
                                 html.Div(
                                     [
                                         html.Div(
-                                            "42" + " %",
+                                            [],
+                                            id = "card_country_pct_fully_vaccinated",
                                             className = "card-info-body"
                                         ),
                                         html.Div(
                                             "Percent of Fully Vaccinated",
+                                            className = "card-info-footer"
+                                        ),
+                                        html.Div(
+                                            [],
+                                            id = "card_country_pct_fully_vaccinated_last_date",
                                             className = "card-info-footer"
                                         ),
                                     ],

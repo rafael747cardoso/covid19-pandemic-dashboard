@@ -28,6 +28,7 @@ from funcs.content_page_world import content_page_world
 from funcs.content_page_continent import content_page_continent
 from funcs.content_page_country import content_page_country
 from funcs.content_page_map import content_page_map
+from funcs.get_card_values import get_card_values
 
 # Display options:
 pd.set_option("display.width", 1200)
@@ -96,17 +97,95 @@ server = app.server
 #----------------------------------------------------------------------------------------------------------------------
 #################################################### Backend ##########################################################
 
-# Card total cases:
+# Card country total cases:
 @app.callback(
-    Output(component_id = "card_country_total_cases", component_property = "children"),
+    [
+        Output(component_id = "card_country_total_cases", component_property = "children"),
+        Output(component_id = "card_country_total_cases_last_date", component_property = "children"),
+    ],
     [
         Input(component_id = "chosen_country", component_property = "value")
     ]
 )
 def update_card_country_total_cases(country_code):
-    x = df.loc[df["iso_code"] == country_code, "cases_total"].iloc[-1]
-    return(x)
+    return(get_card_values(df = df,
+                           var = "cases_total",
+                           country_code = country_code))
 
+# Card country total deaths:
+@app.callback(
+    [
+        Output(component_id = "card_country_total_deaths", component_property = "children"),
+        Output(component_id = "card_country_total_deaths_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_country", component_property = "value")
+    ]
+)
+def update_card_country_total_deaths(country_code):
+    return(get_card_values(df = df,
+                           var = "deaths_total",
+                           country_code = country_code))
+
+# Card country fully vaccinated:
+@app.callback(
+    [
+        Output(component_id = "card_country_fully_vaccinated", component_property = "children"),
+        Output(component_id = "card_country_fully_vaccinated_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_country", component_property = "value")
+    ]
+)
+def update_card_country_fully_vaccinated(country_code):
+    return(get_card_values(df = df,
+                           var = "vaccinated_fully",
+                           country_code = country_code))
+
+# Card country new cases:
+@app.callback(
+    [
+        Output(component_id = "card_country_new_cases", component_property = "children"),
+        Output(component_id = "card_country_new_cases_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_country", component_property = "value")
+    ]
+)
+def update_card_country_new_cases(country_code):
+    return(get_card_values(df = df,
+                           var = "cases_new",
+                           country_code = country_code))
+
+# Card country new deaths:
+@app.callback(
+    [
+        Output(component_id = "card_country_new_deaths", component_property = "children"),
+        Output(component_id = "card_country_new_deaths_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_country", component_property = "value")
+    ]
+)
+def update_card_country_new_deaths(country_code):
+    return(get_card_values(df = df,
+                           var = "deaths_new",
+                           country_code = country_code))
+
+# Card country percent of fully vaccinated:
+@app.callback(
+    [
+        Output(component_id = "card_country_pct_fully_vaccinated", component_property = "children"),
+        Output(component_id = "card_country_pct_fully_vaccinated_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_country", component_property = "value")
+    ]
+)
+def update_card_country_pct_fully_vaccinated(country_code):
+    return(get_card_values(df = df,
+                                   var = "vaccinated_fully_pct",
+                                   country_code = country_code))
 
 
 
@@ -118,9 +197,10 @@ def update_card_country_total_cases(country_code):
     ]
 )
 def update_last_data_date(country_code):
-    x = df.loc[df["iso_code"] == country_code, "date"].iloc[-1]
-    x = "Updated in " + x
-    return(x)
+    last_date = df.loc[df["iso_code"] == country_code, "date"].iloc[-1]
+    last_date = last_date[8:10] + "/" + last_date[5:7] + "/" + last_date[0:4]
+    last_date = "Dataset updated in " + last_date
+    return(last_date)
 
 
 
