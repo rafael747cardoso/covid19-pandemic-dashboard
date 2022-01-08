@@ -11573,7 +11573,7 @@ html {
 
 .last-data-date {
     font-size: 20px;
-    font-weight: 700;    
+    font-weight: 700;
     margin-left: 3vw;
     margin-bottom: 15px;
 }
@@ -11583,6 +11583,18 @@ html {
     margin-left: 3vw;
     margin-bottom: 30px;
 }
+
+.last-data-col {
+    text-align: left;
+    margin-bottom: 30px;    
+}
+
+.data-source-col {
+    text-align: right;
+    padding-right: 5vw;
+    margin-bottom: 30px;  
+}
+
 
 .card-plot {
     border: 1px solid #382C63;

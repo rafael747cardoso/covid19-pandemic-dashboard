@@ -289,11 +289,10 @@ def update_plot_country_time_series_vaccinated(var, mov_avg_period, countries_co
                                           scale = scale,
                                           opts_var = opts_var_trajectories))
 
-
-
-
-
 ############ Map
+
+
+
 
 
 

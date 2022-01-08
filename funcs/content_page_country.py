@@ -219,7 +219,13 @@ def content_page_country(
                                     [],
                                     id = "last_data_date",
                                     className = "last-data-date"
-                                ),
+                                )
+                            ],
+                            width = 4,
+                            className = "last-data-col"
+                        ),
+                        dbc.Col(
+                            [
                                 html.Div(
                                     [
                                         html.Div(
@@ -235,7 +241,8 @@ def content_page_country(
                                     className = "data-source"
                                 )
                             ],
-                            width = 12
+                            width = 8,
+                            className = "data-source-col"
                         )
                     ],
                     className = "last-data-date-and-data-source"
