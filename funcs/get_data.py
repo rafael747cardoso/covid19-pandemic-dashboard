@@ -43,7 +43,8 @@ def get_data():
             "people_fully_vaccinated",
             "people_vaccinated_per_hundred",
             "people_fully_vaccinated_per_hundred",
-            "population"
+            "population",
+            "gdp_per_capita"
         ]
         try:
             df = df[variables]

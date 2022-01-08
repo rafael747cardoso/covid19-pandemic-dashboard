@@ -160,6 +160,21 @@ def update_card_country_fully_vaccinated(country_code):
                            var = "vaccinated_fully",
                            country_code = country_code))
 
+# Card country population:
+@app.callback(
+    [
+        Output(component_id = "card_country_population", component_property = "children"),
+        Output(component_id = "card_country_population_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_country", component_property = "value")
+    ]
+)
+def update_card_country_population(country_code):
+    return(get_card_values(df = df,
+                           var = "population",
+                           country_code = country_code))
+
 # Card country new cases:
 @app.callback(
     [
@@ -204,6 +219,21 @@ def update_card_country_pct_fully_vaccinated(country_code):
     return(get_card_values(df = df,
                                    var = "vaccinated_fully_pct",
                                    country_code = country_code))
+
+# Card country gdp_per_capita:
+@app.callback(
+    [
+        Output(component_id = "card_country_gdp_per_capita", component_property = "children"),
+        Output(component_id = "card_country_gdp_per_capita_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_country", component_property = "value")
+    ]
+)
+def update_card_country_gdp_per_capita(country_code):
+    return(get_card_values(df = df,
+                           var = "gdp_per_capita",
+                           country_code = country_code))
 
 # Last data date:
 @app.callback(

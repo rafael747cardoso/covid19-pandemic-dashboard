@@ -74,7 +74,7 @@ def content_page_country(
                                     className = "card-info"
                                 )
                             ],
-                            width = 4
+                            width = 3
                         ),
                         # Card of total deaths:
                         dbc.Col(
@@ -99,7 +99,7 @@ def content_page_country(
                                     className = "card-info"
                                 )
                             ],
-                            width = 4
+                            width = 3
                         ),
                         # Card of fully vaccinated:
                         dbc.Col(
@@ -124,8 +124,33 @@ def content_page_country(
                                     className = "card-info"
                                 )
                             ],
-                            width = 4
-                        )
+                            width = 3
+                        ),
+                        # Card of population:
+                        dbc.Col(
+                            [
+                                html.Div(
+                                    [
+                                        html.Div(
+                                            [],
+                                            id = "card_country_population",
+                                            className = "card-info-body"
+                                        ),
+                                        html.Div(
+                                            "Population",
+                                            className = "card-info-footer"
+                                        ),
+                                        html.Div(
+                                            [],
+                                            id = "card_country_population_last_date",
+                                            className = "card-info-footer"
+                                        ),
+                                    ],
+                                    className = "card-info"
+                                )
+                            ],
+                            width = 3
+                        )                        
                     ],
                     className = "row-cards-info"
                 ),
@@ -155,7 +180,7 @@ def content_page_country(
                                     className = "card-info"
                                 )
                             ],
-                            width = 4
+                            width = 3
                         ),
                         # Card of new deaths:
                         dbc.Col(
@@ -180,7 +205,7 @@ def content_page_country(
                                     className = "card-info"
                                 )
                             ],
-                            width = 4
+                            width = 3
                         ),
                         # Card of percent of fully vaccinated:
                         dbc.Col(
@@ -205,7 +230,32 @@ def content_page_country(
                                     className = "card-info"
                                 )
                             ],
-                            width = 4
+                            width = 3
+                        ),
+                        # Card of GDP per capita:
+                        dbc.Col(
+                            [
+                                html.Div(
+                                    [
+                                        html.Div(
+                                            [],
+                                            id = "card_country_gdp_per_capita",
+                                            className = "card-info-body"
+                                        ),
+                                        html.Div(
+                                            "GDP per capita",
+                                            className = "card-info-footer"
+                                        ),
+                                        html.Div(
+                                            [],
+                                            id = "card_country_gdp_per_capita_last_date",
+                                            className = "card-info-footer"
+                                        ),
+                                    ],
+                                    className = "card-info"
+                                )
+                            ],
+                            width = 3
                         )
                     ],
                     className = "row-cards-info"
