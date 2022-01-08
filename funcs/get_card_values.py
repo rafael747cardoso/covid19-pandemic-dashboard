@@ -18,13 +18,11 @@ def get_card_values(df, var, country_code):
     last_date = last_date[8:10] + "/" + last_date[5:7] + "/" + last_date[0:4]
     if np.isnan(x):
         x = "-"
-    # else:
-        # if x == round(x, 0):
-        #     x = "{:,d}".format(x)
-        # else:
-        #     x = "{:,.2f}".format(x)
-        # if var == "vaccinated_fully_pct":
-        #     x = x + " %"
+    else:
+        if var == "vaccinated_fully_pct":
+            x = "{:,.2f}".format(x) + " %"
+        else:
+            x = "{:,d}".format(int(x))
 
     return (x, last_date)
 
