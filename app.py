@@ -80,6 +80,7 @@ opts_var_trajectories = [
     {"label": "Deaths", "value": "deaths"}
 ]
 opts_mov_avg_period = [
+    {"label": "1 day", "value": "1"},
     {"label": "7 days", "value": "7"},
     {"label": "14 days", "value": "14"},
     {"label": "30 days", "value": "30"}

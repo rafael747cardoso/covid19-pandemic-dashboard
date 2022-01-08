@@ -21,30 +21,44 @@ def make_plot_country_trajectories(df, var, mov_avg_period, countries_codes, sca
 
     # Axes names:
     var_name = [opts_var[i]["label"] for i in range(len(opts_var)) if opts_var[i]["value"] == var][0]
-    x_var_name = "New " + var_name
-    y_var_name = "Total " + var_name
+    x_var_name = "Total " + var_name
+    y_var_name = "New " + var_name
     
     # Plot:
-    lvls = countries_codes
-    n_levels = len(lvls)
-    cmap = LinearSegmentedColormap.from_list("my_palette", ["#111539", "#97A1D9"])
-    my_palette = [to_hex(j) for j in [cmap(i / n_levels) for i in np.array(range(n_levels))]]
-
+    n_colors = len(countries_codes)
+    my_colors = ["#F64011", "#F69111", "#F6F511", "#9FF611", "#11F6E0", "#DF11F6"]
+    cmap = LinearSegmentedColormap.from_list("my_palette", my_colors)
+    my_palette = [to_hex(j) for j in [cmap(i / n_colors) for i in np.array(range(n_colors))]]
     fig = go.Figure()
+    lvls = countries_codes
     for l, lvl in enumerate(lvls):
+        # Filter the country:
+        country_name = df_plot["location"][df_plot["iso_code"] == lvl].iloc[0]
+        df_country = df_plot[df_plot["iso_code"] == lvl]
+        
+        # Add the moving average:
+        mov_avg_period = int(mov_avg_period)
+        X = df_country[var + "_total"].values
+        X = [np.mean(X[i:(i + mov_avg_period)]) for i in range(0, len(X) - mov_avg_period, 1)]
+        Y = df_country[var + "_new"].values
+        Y = [np.mean(Y[i:(i + mov_avg_period)]) for i in range(0, len(Y) - mov_avg_period, 1)]
+        
+        # Plot the trace:
         fig.add_trace(
             go.Scatter(
-                x = df_plot[var + "_total"][df_plot["iso_code"] == lvl],
-                y = df_plot[var + "_new"][df_plot["iso_code"] == lvl],
+                x = X,
+                y = Y,
                 mode = "lines",
                 line = {
-                    "width": 5,
+                    "width": 3,
                     "color": my_palette[l]
                 },
-                name = lvl,
+                text = df_country["date"],
+                name = country_name,
                 hovertemplate = "<b>" + x_var_name + ": %{x:}<br>" +
                                         y_var_name + ": %{y:}<br>" +
-                                        "Country: " + lvl +
+                                        "Country: " + country_name + "<br>"
+                                        "Date: %{text}" + 
                                         "</b><extra></extra>"
             )
         )
@@ -59,7 +73,8 @@ def make_plot_country_trajectories(df, var, mov_avg_period, countries_codes, sca
                 "size": 18,
                 "color": "white"
             },
-            "gridcolor": "rgba(255, 255, 255, 0.1)"
+            "gridcolor": "rgba(255, 255, 255, 0.1)",
+            "type": scale
         },
         yaxis = {
             "title": "<b>" + y_var_name + "</b>",
@@ -81,7 +96,7 @@ def make_plot_country_trajectories(df, var, mov_avg_period, countries_codes, sca
             "color": "white",
             "family": "Helvetica"
         },
-        showlegend = False,
+        showlegend = True,
         paper_bgcolor = "rgba(0, 0, 0, 0)",
         plot_bgcolor = "rgba(0, 0, 0, 0)",
         hoverlabel = {
