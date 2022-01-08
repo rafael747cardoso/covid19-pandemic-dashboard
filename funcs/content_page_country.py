@@ -31,18 +31,6 @@ def content_page_country(
                     [
                         dbc.Col(
                             [
-                                html.Img(
-                                    id = "country_flag",
-                                    src = "",
-                                    height = "100px",
-                                    className = "img-flag"
-                                )
-                            ],
-                            width = 1,
-                            className = "col-flag"
-                        ),
-                        dbc.Col(
-                            [
                                 html.Div(
                                     "Choose the country",
                                     className = "filter-title"
@@ -54,6 +42,22 @@ def content_page_country(
                                 )
                             ],
                             width = 4
+                        ),
+                        dbc.Col(
+                            [],
+                            width = 5
+                        ),
+                        dbc.Col(
+                            [
+                                html.Img(
+                                    id = "country_flag",
+                                    src = "",
+                                    height = "100px",
+                                    className = "img-flag"
+                                )
+                            ],
+                            width = 3,
+                            className = "col-flag"
                         )
                     ],
                     className = "my-select"

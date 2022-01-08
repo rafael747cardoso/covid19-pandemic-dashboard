@@ -11540,6 +11540,8 @@ html {
 
 .col-flag {
     bottom: -5px;
+    text-align: right;
+    padding-right: 5vw;
 }
 
 .img-flag {
