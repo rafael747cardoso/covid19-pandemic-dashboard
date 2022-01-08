@@ -259,6 +259,7 @@ def content_page_country(
                                                             "Cases",
                                                             className = "card-plot-header"
                                                         ),
+                                                        # Variable:
                                                         html.Div(
                                                             [
                                                                 html.Div(
@@ -271,6 +272,7 @@ def content_page_country(
                                                                 )
                                                             ]
                                                         ),
+                                                        # Scale:
                                                         html.Div(
                                                             [
                                                                 dbc.RadioItems(
@@ -282,6 +284,7 @@ def content_page_country(
                                                             ],
                                                             className = "radio-check-scale"
                                                         ),
+                                                        # Plot:
                                                         dcc.Graph(
                                                             id = "plot_country_time_series_cases",
                                                             figure = {}
@@ -302,6 +305,7 @@ def content_page_country(
                                                             "Deaths",
                                                             className = "card-plot-header"
                                                         ),
+                                                        # Variable:
                                                         html.Div(
                                                             [
                                                                 html.Div(
@@ -314,6 +318,7 @@ def content_page_country(
                                                                 )
                                                             ]
                                                         ),
+                                                        # Scale:
                                                         html.Div(
                                                             [
                                                                 dbc.RadioItems(
@@ -325,6 +330,7 @@ def content_page_country(
                                                             ],
                                                             className = "radio-check-scale"
                                                         ),
+                                                        # Plot:
                                                         dcc.Graph(
                                                             id = "plot_country_time_series_deaths",
                                                             figure = {}
@@ -345,6 +351,7 @@ def content_page_country(
                                                             "Vaccinated",
                                                             className = "card-plot-header"
                                                         ),
+                                                        # Variable:
                                                         html.Div(
                                                             [
                                                                 html.Div(
@@ -357,6 +364,7 @@ def content_page_country(
                                                                 )
                                                             ]
                                                         ),
+                                                        # Scale:
                                                         html.Div(
                                                             [
                                                                 dbc.RadioItems(
@@ -368,6 +376,7 @@ def content_page_country(
                                                             ],
                                                             className = "radio-check-scale"
                                                         ),
+                                                        # Plot:
                                                         dcc.Graph(
                                                             id = "plot_country_time_series_vaccinated",
                                                             figure = {}
@@ -407,7 +416,7 @@ def content_page_country(
                                             ],
                                             width = 4
                                         ),
-                                        # Period:
+                                        # Moving average period:
                                         dbc.Col(
                                             [
                                                 html.Div(
@@ -448,6 +457,7 @@ def content_page_country(
                                             [
                                                 html.Div(
                                                     [
+                                                        # Scale:
                                                         html.Div(
                                                             [
                                                                 dbc.RadioItems(
@@ -459,6 +469,7 @@ def content_page_country(
                                                             ],
                                                             className = "radio-check-scale"
                                                         ),
+                                                        # Plot:
                                                         dcc.Graph(
                                                             id = "plot_country_trajectory",
                                                             figure = {}
@@ -472,7 +483,6 @@ def content_page_country(
                                     ],
                                     className = "row-trajectories"
                                 )
-
                             ],
                             label = "Trajectories",
                             className = "tab-trajectories"

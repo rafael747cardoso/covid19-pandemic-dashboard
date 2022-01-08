@@ -29,6 +29,7 @@ from funcs.content_page_continent import content_page_continent
 from funcs.content_page_country import content_page_country
 from funcs.content_page_map import content_page_map
 from funcs.get_card_values import get_card_values
+from funcs.make_plot_country_time_series import make_plot_country_time_series
 
 # Display options:
 pd.set_option("display.width", 1200)
@@ -71,7 +72,7 @@ opts_var_vaccinated = [
 ]
 opts_scales = [
     {"label": "Linear", "value": "linear"},
-    {"label": "Log10", "value": "log10"}
+    {"label": "Log10", "value": "log"}
 ]
 opts_var_trajectories = [
     {"label": "Cases", "value": "trajectory_cases"},
@@ -96,6 +97,21 @@ server = app.server
 
 #----------------------------------------------------------------------------------------------------------------------
 #################################################### Backend ##########################################################
+
+############ World
+
+
+
+
+############ Continent
+
+
+
+
+
+############ Country
+
+###### Cards
 
 # Card country total cases:
 @app.callback(
@@ -187,8 +203,6 @@ def update_card_country_pct_fully_vaccinated(country_code):
                                    var = "vaccinated_fully_pct",
                                    country_code = country_code))
 
-
-
 # Last data date:
 @app.callback(
     Output(component_id = "last_data_date", component_property = "children"),
@@ -201,6 +215,67 @@ def update_last_data_date(country_code):
     last_date = last_date[8:10] + "/" + last_date[5:7] + "/" + last_date[0:4]
     last_date = "Dataset updated in " + last_date
     return(last_date)
+
+###### Plots
+
+### Time Series
+
+# Cases:
+@app.callback(
+    Output(component_id = "plot_country_time_series_cases", component_property = "figure"),
+    [
+        Input(component_id = "chosen_country", component_property = "value"),
+        Input(component_id = "chosen_var_country_time_series_cases", component_property = "value"),
+        Input(component_id = "chosen_scale_country_time_series_cases", component_property = "value")
+    ]
+)
+def update_plot_country_time_series_cases(country_code, var, scale):
+    return(make_plot_country_time_series(df = df,
+                                         country_code = country_code,
+                                         var = var,
+                                         scale = scale,
+                                         opts_var = opts_var_cases))
+
+# Deaths:
+@app.callback(
+    Output(component_id = "plot_country_time_series_deaths", component_property = "figure"),
+    [
+        Input(component_id = "chosen_country", component_property = "value"),
+        Input(component_id = "chosen_var_country_time_series_deaths", component_property = "value"),
+        Input(component_id = "chosen_scale_country_time_series_deaths", component_property = "value")
+    ]
+)
+def update_plot_country_time_series_deaths(country_code, var, scale):
+    return(make_plot_country_time_series(df = df,
+                                         country_code = country_code,
+                                         var = var,
+                                         scale = scale,
+                                         opts_var = opts_var_deaths))
+
+# Vaccinated:
+@app.callback(
+    Output(component_id = "plot_country_time_series_vaccinated", component_property = "figure"),
+    [
+        Input(component_id = "chosen_country", component_property = "value"),
+        Input(component_id = "chosen_var_country_time_series_vaccinated", component_property = "value"),
+        Input(component_id = "chosen_scale_country_time_series_vaccinated", component_property = "value")
+    ]
+)
+def update_plot_country_time_series_vaccinated(country_code, var, scale):
+    return(make_plot_country_time_series(df = df,
+                                         country_code = country_code,
+                                         var = var,
+                                         scale = scale,
+                                         opts_var = opts_var_vaccinated))
+
+### Trajectories
+
+
+
+
+
+############ Map
+
 
 
 
