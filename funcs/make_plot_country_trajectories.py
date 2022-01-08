@@ -55,8 +55,8 @@ def make_plot_country_trajectories(df, var, mov_avg_period, countries_codes, sca
                 },
                 text = df_country["date"],
                 name = country_name,
-                hovertemplate = "<b>" + x_var_name + ": %{x:}<br>" +
-                                        y_var_name + ": %{y:}<br>" +
+                hovertemplate = "<b>" + x_var_name + ": %{x:,.0f}<br>" +
+                                        y_var_name + ": %{y:,.0f}<br>" +
                                         "Country: " + country_name + "<br>"
                                         "Date: %{text}" + 
                                         "</b><extra></extra>"

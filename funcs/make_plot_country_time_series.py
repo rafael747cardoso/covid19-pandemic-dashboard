@@ -30,7 +30,7 @@ def make_plot_country_time_series(df, country_code, var, scale, opts_var):
                 "color": "#FFA800"
             },
             hovertemplate = "<b>" + x_var_name + ": %{x}<br>" +
-                                    y_var_name + ": %{y:}<br></b><extra></extra>"
+                                    y_var_name + ": %{y:,.0f}<br></b><extra></extra>"
         )
     )
     fig.update_layout(
