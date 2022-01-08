@@ -1,6 +1,7 @@
 
 from dash import html, dcc
 import dash_bootstrap_components as dbc
+import base64
 
 def content_page_country(
     opts_countries,
@@ -28,6 +29,18 @@ def content_page_country(
                 
                 dbc.Row(
                     [
+                        dbc.Col(
+                            [
+                                html.Img(
+                                    id = "country_flag",
+                                    src = "",
+                                    height = "100px",
+                                    className = "img-flag"
+                                )
+                            ],
+                            width = 1,
+                            className = "col-flag"
+                        ),
                         dbc.Col(
                             [
                                 html.Div(

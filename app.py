@@ -111,7 +111,28 @@ server = app.server
 
 
 
+
+
+
+
 ############ Country
+
+###### Flag
+
+# Image of the country's flag:
+@app.callback(
+    Output(component_id = "country_flag", component_property = "src"),
+    [
+        Input(component_id = "chosen_country", component_property = "value")
+    ]
+)
+def update_country_flag(country_code):
+    try:
+        flag_country = base64.b64encode(open("figs/flags/" + country_code + ".gif", "rb").read())
+        flag_country_encoded = "data:image/png;base64,{}".format(flag_country.decode())
+        return (flag_country_encoded)
+    except (Exception,):
+        return("")
 
 ###### Cards
 
