@@ -30,6 +30,7 @@ from funcs.content_page_country import content_page_country
 from funcs.content_page_map import content_page_map
 from funcs.get_card_values import get_card_values
 from funcs.make_plot_country_time_series import make_plot_country_time_series
+from funcs.make_plot_country_trajectories import make_plot_country_trajectories
 
 # Display options:
 pd.set_option("display.width", 1200)
@@ -75,13 +76,13 @@ opts_scales = [
     {"label": "Log10", "value": "log"}
 ]
 opts_var_trajectories = [
-    {"label": "Cases", "value": "trajectory_cases"},
-    {"label": "Deaths", "value": "trajectory_deaths"}
+    {"label": "Cases", "value": "cases"},
+    {"label": "Deaths", "value": "deaths"}
 ]
 opts_mov_avg_period = [
-    {"label": "1 day", "value": "mov_avg_period_1_day"},
-    {"label": "1 week", "value": "mov_avg_period_1_week"},
-    {"label": "1 month", "value": "mov_avg_period_1_month"}
+    {"label": "7 days", "value": "7"},
+    {"label": "14 days", "value": "14"},
+    {"label": "30 days", "value": "30"}
 ]
 
 
@@ -269,6 +270,23 @@ def update_plot_country_time_series_vaccinated(country_code, var, scale):
                                          opts_var = opts_var_vaccinated))
 
 ### Trajectories
+
+@app.callback(
+    Output(component_id = "plot_country_trajectories", component_property = "figure"),
+    [
+        Input(component_id = "chosen_var_country_trajectories", component_property = "value"),
+        Input(component_id = "chosen_mov_avg_period_country_trajectories", component_property = "value"),
+        Input(component_id = "chosen_countries_country_trajectories", component_property = "value"),
+        Input(component_id = "chosen_scale_country_trajectories", component_property = "value")
+    ]
+)
+def update_plot_country_time_series_vaccinated(var, mov_avg_period, countries_codes, scale):
+    return(make_plot_country_trajectories(df = df,
+                                          var = var,
+                                          mov_avg_period = mov_avg_period,
+                                          countries_codes = countries_codes,
+                                          scale = scale,
+                                          opts_var = opts_var_trajectories))
 
 
 

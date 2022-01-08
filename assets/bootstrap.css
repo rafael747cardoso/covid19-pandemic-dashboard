@@ -11653,6 +11653,27 @@ input, select {
     margin-bottom: 10px;
 }
 
+.VirtualizedSelectOption {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0D0337;
+}
+
+.Select-value-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0D0337;
+}
+
+.Select-value {
+    margin-bottom: 4px;
+}
+
+
+
+
+
+
 
 
 

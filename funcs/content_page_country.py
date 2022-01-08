@@ -424,7 +424,7 @@ def content_page_country(
                                                     className = "filter-title"
                                                 ),
                                                 dbc.Select(
-                                                    id = "chosen_var_country_mov_avg_period",
+                                                    id = "chosen_mov_avg_period_country_trajectories",
                                                     options = opts_mov_avg_period,
                                                     value = opts_mov_avg_period[0]["value"]
                                                 )
@@ -438,10 +438,11 @@ def content_page_country(
                                                     "Countries",
                                                     className = "filter-title"
                                                 ),
-                                                dbc.Select(
-                                                    id = "chosen_var_country_countries",
+                                                dcc.Dropdown(
+                                                    id = "chosen_countries_country_trajectories",
                                                     options = opts_countries,
-                                                    value = opts_countries[0]["value"]
+                                                    value = [opts_countries[0]["value"]],
+                                                    multi = True
                                                 )
                                             ],
                                             width = 4
@@ -461,7 +462,7 @@ def content_page_country(
                                                         html.Div(
                                                             [
                                                                 dbc.RadioItems(
-                                                                    id = "chosen_scale_country_trajectory",
+                                                                    id = "chosen_scale_country_trajectories",
                                                                     options = opts_scales,
                                                                     value = opts_scales[0]["value"],
                                                                     inline = True
@@ -471,7 +472,7 @@ def content_page_country(
                                                         ),
                                                         # Plot:
                                                         dcc.Graph(
-                                                            id = "plot_country_trajectory",
+                                                            id = "plot_country_trajectories",
                                                             figure = {}
                                                         )
                                                     ],
