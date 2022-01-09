@@ -11,7 +11,8 @@ def make_plot_infection_vaccination(df,
     return: fig
     """
 
-    df_plot = df.loc[df["iso_code"].isin(country_codes)].groupby(by = "location").tail(1)[["location",
+    df_plot = df.loc[df["iso_code"].isin(country_codes)].groupby(by = "location").tail(1)[["iso_code",
+                                                                                           "location",
                                                                                            "cases_total",
                                                                                            "vaccinated_fully"]].dropna()
     x_var_name = "Fully vaccinated"
@@ -27,7 +28,7 @@ def make_plot_infection_vaccination(df,
                 "color": "#FFC300"
             },
             text = df_plot["location"],
-            hovertemplate = "<b>%{text}<br>" + 
+            hovertemplate = "<b> %{text}<br>" + 
                             x_var_name + ": %{x:,.0f}<br>" +
                             y_var_name + ": %{y:,.0f}<br></b><extra></extra>"
         )

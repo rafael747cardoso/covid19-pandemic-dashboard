@@ -31,6 +31,7 @@ from funcs.content_page_map import content_page_map
 from funcs.get_card_values import get_card_values
 from funcs.make_plot_time_series import make_plot_time_series
 from funcs.make_plot_trajectories import make_plot_trajectories
+from funcs.make_plot_map_choropleth import make_plot_map_choropleth
 
 # Display options:
 pd.set_option("display.width", 1200)
@@ -87,8 +88,10 @@ opts_mov_avg_period = [
 continents = df["continent"].dropna().unique().tolist()
 continents.sort()
 opts_continents = [{"label": i, "value": i} for i in continents]
-
-
+opts_var_map = opts_var_cases + opts_var_deaths + opts_var_vaccinated + [
+    {"label": "Population", "value": "population"},
+    {"label": "GDP per capita", "value": "gdp_per_capita"}
+]
 
 #----------------------------------------------------------------------------------------------------------------------
 ################################################# Initialize ##########################################################
@@ -103,7 +106,7 @@ server = app.server
 #----------------------------------------------------------------------------------------------------------------------
 #################################################### Backend ##########################################################
 
-############ World
+############ World ----------------------------------------------------------------------------------------------------
 
 ###### Plots
 
@@ -157,7 +160,7 @@ def update_plot_world_time_series_vaccinated(var, scale):
                                  scale = scale,
                                  opts_var = opts_var_vaccinated))
 
-############ Continent
+############ Continent ------------------------------------------------------------------------------------------------
 
 ###### Flag
 
@@ -394,7 +397,7 @@ def update_plot_continent_time_series_vaccinated(var, mov_avg_period, continents
                                   scale = scale,
                                   opts_var = opts_var_trajectories))
 
-############ Country
+############ Country --------------------------------------------------------------------------------------------------
 
 ###### Flag
 
@@ -631,14 +634,19 @@ def update_plot_country_time_series_vaccinated(var, mov_avg_period, countries_co
                                   scale = scale,
                                   opts_var = opts_var_trajectories))
 
-############ Map
+############ Map ------------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
+# Choropleth Map:
+@app.callback(
+    Output(component_id = "map_choropleth", component_property = "figure"),
+    [
+        Input(component_id = "chosen_var_map", component_property = "value")
+    ]
+)
+def update_map_choropleth(var):
+    return(make_plot_map_choropleth(df = df,
+                                    var = var,
+                                    country_names = country_names))
 
 #----------------------------------------------------------------------------------------------------------------------
 ################################################## Frontend ###########################################################
@@ -825,7 +833,7 @@ def render_page_content(pathname):
                                     opts_var_trajectories = opts_var_trajectories,
                                     opts_mov_avg_period = opts_mov_avg_period)
     elif pathname == "/page_map":
-        return content_page_map()
+        return content_page_map(opts_var_map = opts_var_map)
 
 
 #----------------------------------------------------------------------------------------------------------------------

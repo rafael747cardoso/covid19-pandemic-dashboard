@@ -11431,6 +11431,10 @@ html {
     background-color: #0D0629;
 }
 
+#_dash-app-content {
+    background-color: #0D0629;
+}
+
 /************************************************** Main Navbar ******************************************************/
 
 .container, .container-sm, .container-md, .container-lg, .container-xl {
@@ -11632,8 +11636,6 @@ html {
     padding-right: 1vw;
 }
 
-
-
 /**************************************************** Selects ********************************************************/
 
 .my-select {
@@ -11693,11 +11695,26 @@ input, select {
     margin-bottom: 4px;
 }
 
+.radio-check-map-vars {
+    text-align: left;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 30px;    
+}
 
+.radio-check-map-vars input, .radio-check-map-vars select {
+	width: 2%;
+	margin-top: 10px;
+}
+.radio-check-map-vars .form-check-label {
+    margin-left: 5px;
+}
 
+/**************************************************** Map ************************************************************/
 
-
-
-
+.map-choropleth-box div.js-plotly-plot div.plot-container.plotly div.user-select-none.svg-container svg.main-svg {
+    background: rgba(0, 0, 0, 0) !important;
+}
 
 
