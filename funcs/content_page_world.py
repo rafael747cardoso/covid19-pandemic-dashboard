@@ -2,8 +2,10 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
 import base64
+from funcs.get_card_values import get_card_values
 
 def content_page_world(
+        df,
         opts_var_cases,
         opts_var_deaths,
         opts_var_vaccinated,
@@ -17,6 +19,10 @@ def content_page_world(
     param opts_scales:
     return: pg
     """
+    
+    last_date = df.loc[df["location"] == "World", "date"].iloc[-1]
+    last_date = last_date[8:10] + "/" + last_date[5:7] + "/" + last_date[0:4]
+    last_date_world = "Dataset updated in " + last_date
 
     pg = [
         html.Div(
@@ -33,7 +39,10 @@ def content_page_world(
                                 html.Div(
                                     [
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "cases_total",
+                                                            location_id = "",
+                                                            location_type = "world")[0],
                                             id = "card_world_total_cases",
                                             className = "card-info-body"
                                         ),
@@ -42,7 +51,10 @@ def content_page_world(
                                             className = "card-info-footer"
                                         ),
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "cases_total",
+                                                            location_id = "",
+                                                            location_type = "world")[1],
                                             id = "card_world_total_cases_last_date",
                                             className = "card-info-footer"
                                         ),
@@ -58,7 +70,10 @@ def content_page_world(
                                 html.Div(
                                     [
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "deaths_total",
+                                                            location_id = "",
+                                                            location_type = "world")[0],
                                             id = "card_world_total_deaths",
                                             className = "card-info-body"
                                         ),
@@ -67,7 +82,10 @@ def content_page_world(
                                             className = "card-info-footer"
                                         ),
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "deaths_total",
+                                                            location_id = "",
+                                                            location_type = "world")[1],
                                             id = "card_world_total_deaths_last_date",
                                             className = "card-info-footer"
                                         ),
@@ -83,7 +101,10 @@ def content_page_world(
                                 html.Div(
                                     [
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "vaccinated_fully",
+                                                            location_id = "",
+                                                            location_type = "world")[0],
                                             id = "card_world_fully_vaccinated",
                                             className = "card-info-body"
                                         ),
@@ -92,7 +113,10 @@ def content_page_world(
                                             className = "card-info-footer"
                                         ),
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "vaccinated_fully",
+                                                            location_id = "",
+                                                            location_type = "world")[1],
                                             id = "card_world_fully_vaccinated_last_date",
                                             className = "card-info-footer"
                                         ),
@@ -108,7 +132,10 @@ def content_page_world(
                                 html.Div(
                                     [
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "population",
+                                                            location_id = "",
+                                                            location_type = "world")[0],
                                             id = "card_world_population",
                                             className = "card-info-body"
                                         ),
@@ -117,7 +144,10 @@ def content_page_world(
                                             className = "card-info-footer"
                                         ),
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "population",
+                                                            location_id = "",
+                                                            location_type = "world")[1],
                                             id = "card_world_population_last_date",
                                             className = "card-info-footer"
                                         ),
@@ -139,7 +169,10 @@ def content_page_world(
                                 html.Div(
                                     [
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "cases_new",
+                                                            location_id = "",
+                                                            location_type = "world")[0],
                                             id = "card_world_new_cases",
                                             className = "card-info-body"
                                         ),
@@ -148,7 +181,10 @@ def content_page_world(
                                             className = "card-info-footer"
                                         ),
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "cases_new",
+                                                            location_id = "",
+                                                            location_type = "world")[1],
                                             id = "card_world_new_cases_last_date",
                                             className = "card-info-footer"
                                         ),
@@ -164,7 +200,10 @@ def content_page_world(
                                 html.Div(
                                     [
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "deaths_new",
+                                                            location_id = "",
+                                                            location_type = "world")[0],
                                             id = "card_world_new_deaths",
                                             className = "card-info-body"
                                         ),
@@ -173,7 +212,10 @@ def content_page_world(
                                             className = "card-info-footer"
                                         ),
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "deaths_new",
+                                                            location_id = "",
+                                                            location_type = "world")[1],
                                             id = "card_world_new_deaths_last_date",
                                             className = "card-info-footer"
                                         ),
@@ -189,7 +231,10 @@ def content_page_world(
                                 html.Div(
                                     [
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "vaccinated_fully_pct",
+                                                            location_id = "",
+                                                            location_type = "world")[0],
                                             id = "card_world_pct_fully_vaccinated",
                                             className = "card-info-body"
                                         ),
@@ -198,7 +243,10 @@ def content_page_world(
                                             className = "card-info-footer"
                                         ),
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "vaccinated_fully_pct",
+                                                            location_id = "",
+                                                            location_type = "world")[1],
                                             id = "card_world_pct_fully_vaccinated_last_date",
                                             className = "card-info-footer"
                                         ),
@@ -214,7 +262,10 @@ def content_page_world(
                                 html.Div(
                                     [
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "gdp_per_capita",
+                                                            location_id = "",
+                                                            location_type = "world")[0],
                                             id = "card_world_gdp_per_capita",
                                             className = "card-info-body"
                                         ),
@@ -223,7 +274,10 @@ def content_page_world(
                                             className = "card-info-footer"
                                         ),
                                         html.Div(
-                                            [],
+                                            get_card_values(df = df,
+                                                            var = "gdp_per_capita",
+                                                            location_id = "",
+                                                            location_type = "world")[1],
                                             id = "card_world_gdp_per_capita_last_date",
                                             className = "card-info-footer"
                                         ),
@@ -242,7 +296,7 @@ def content_page_world(
                         dbc.Col(
                             [
                                 html.Div(
-                                    [],
+                                    last_date_world,
                                     id = "world_last_data_date",
                                     className = "last-data-date"
                                 )

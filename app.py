@@ -105,151 +105,57 @@ server = app.server
 
 ############ World
 
-###### Cards
+###### Plots
 
-# Card world total cases:
+### Time Series
+
+# Cases:
 @app.callback(
+    Output(component_id = "plot_world_time_series_cases", component_property = "figure"),
     [
-        Output(component_id = "card_world_total_cases", component_property = "children"),
-        Output(component_id = "card_world_total_cases_last_date", component_property = "children"),
-    ],
-    [
-        Input(component_id = "chosen_continent", component_property = "value")
+        Input(component_id = "chosen_var_world_time_series_cases", component_property = "value"),
+        Input(component_id = "chosen_scale_world_time_series_cases", component_property = "value")
     ]
 )
-def update_card_world_total_cases(dummy_var):
-    return(get_card_values(df = df,
-                           var = "cases_total",
-                           location_id = dummy_var,
-                           location_type = "world"))
+def update_plot_world_time_series_cases(var, scale):
+    return(make_plot_time_series(df = df,
+                                 location_id = "World",
+                                 location_type = "world",
+                                 var = var,
+                                 scale = scale,
+                                 opts_var = opts_var_cases))
 
-# Card world total deaths:
+# Deaths:
 @app.callback(
+    Output(component_id = "plot_world_time_series_deaths", component_property = "figure"),
     [
-        Output(component_id = "card_world_total_deaths", component_property = "children"),
-        Output(component_id = "card_world_total_deaths_last_date", component_property = "children"),
-    ],
-    [
-        Input(component_id = "chosen_continent", component_property = "value")
+        Input(component_id = "chosen_var_world_time_series_deaths", component_property = "value"),
+        Input(component_id = "chosen_scale_world_time_series_deaths", component_property = "value")
     ]
 )
-def update_card_world_total_deaths(dummy_var):
-    return(get_card_values(df = df,
-                           var = "deaths_total",
-                           location_id = dummy_var,
-                           location_type = "world"))
+def update_plot_world_time_series_deaths(var, scale):
+    return(make_plot_time_series(df = df,
+                                 location_id = "World",
+                                 location_type = "world",
+                                 var = var,
+                                 scale = scale,
+                                 opts_var = opts_var_deaths))
 
-# Card world fully vaccinated:
+# Vaccinated:
 @app.callback(
+    Output(component_id = "plot_world_time_series_vaccinated", component_property = "figure"),
     [
-        Output(component_id = "card_world_fully_vaccinated", component_property = "children"),
-        Output(component_id = "card_world_fully_vaccinated_last_date", component_property = "children"),
-    ],
-    [
-        Input(component_id = "chosen_continent", component_property = "value")
+        Input(component_id = "chosen_var_world_time_series_vaccinated", component_property = "value"),
+        Input(component_id = "chosen_scale_world_time_series_vaccinated", component_property = "value")
     ]
 )
-def update_card_world_fully_vaccinated(dummy_var):
-    return(get_card_values(df = df,
-                           var = "vaccinated_fully",
-                           location_id = dummy_var,
-                           location_type = "world"))
-
-# Card world population:
-@app.callback(
-    [
-        Output(component_id = "card_world_population", component_property = "children"),
-        Output(component_id = "card_world_population_last_date", component_property = "children"),
-    ],
-    [
-        Input(component_id = "chosen_continent", component_property = "value")
-    ]
-)
-def update_card_world_population(dummy_var):
-    return(get_card_values(df = df,
-                           var = "population",
-                           location_id = dummy_var,
-                           location_type = "world"))
-
-# Card world new cases:
-@app.callback(
-    [
-        Output(component_id = "card_world_new_cases", component_property = "children"),
-        Output(component_id = "card_world_new_cases_last_date", component_property = "children"),
-    ],
-    [
-        Input(component_id = "chosen_continent", component_property = "value")
-    ]
-)
-def update_card_world_new_cases(dummy_var):
-    return(get_card_values(df = df,
-                           var = "cases_new",
-                           location_id = dummy_var,
-                           location_type = "world"))
-
-# Card world new deaths:
-@app.callback(
-    [
-        Output(component_id = "card_world_new_deaths", component_property = "children"),
-        Output(component_id = "card_world_new_deaths_last_date", component_property = "children"),
-    ],
-    [
-        Input(component_id = "chosen_continent", component_property = "value")
-    ]
-)
-def update_card_world_new_deaths(dummy_var):
-    return(get_card_values(df = df,
-                           var = "deaths_new",
-                           location_id = dummy_var,
-                           location_type = "world"))
-
-# Card world percent of fully vaccinated:
-@app.callback(
-    [
-        Output(component_id = "card_world_pct_fully_vaccinated", component_property = "children"),
-        Output(component_id = "card_world_pct_fully_vaccinated_last_date", component_property = "children"),
-    ],
-    [
-        Input(component_id = "chosen_continent", component_property = "value")
-    ]
-)
-def update_card_world_pct_fully_vaccinated(dummy_var):
-    return(get_card_values(df = df,
-                           var = "vaccinated_fully_pct",
-                           location_id = dummy_var,
-                           location_type = "world"))
-
-# Card world gdp_per_capita:
-@app.callback(
-    [
-        Output(component_id = "card_world_gdp_per_capita", component_property = "children"),
-        Output(component_id = "card_world_gdp_per_capita_last_date", component_property = "children"),
-    ],
-    [
-        Input(component_id = "chosen_continent", component_property = "value")
-    ]
-)
-def update_card_world_gdp_per_capita(dummy_var):
-    return(get_card_values(df = df,
-                           var = "gdp_per_capita",
-                           location_id = dummy_var,
-                           location_type = "world"))
-
-# Last data date:
-@app.callback(
-    Output(component_id = "world_last_data_date", component_property = "children"),
-    [
-        Input(component_id = "chosen_continent", component_property = "value")
-    ]
-)
-def update_world_last_data_date(dummy_var):
-    last_date = df.loc[df["location"] == "World", "date"].iloc[-1]
-    last_date = last_date[8:10] + "/" + last_date[5:7] + "/" + last_date[0:4]
-    last_date = "Dataset updated in " + last_date
-    return(last_date)
-
-
-
+def update_plot_world_time_series_vaccinated(var, scale):
+    return(make_plot_time_series(df = df,
+                                 location_id = "World",
+                                 location_type = "world",
+                                 var = var,
+                                 scale = scale,
+                                 opts_var = opts_var_vaccinated))
 
 
 
@@ -895,9 +801,17 @@ app.layout = html.Div(
 )
 def render_page_content(pathname):
     if pathname == "/":
-        return content_page_world()
+        return content_page_world(df = df,
+                                  opts_var_cases = opts_var_cases,
+                                  opts_var_deaths = opts_var_deaths,
+                                  opts_var_vaccinated = opts_var_vaccinated,
+                                  opts_scales = opts_scales)
     elif pathname == "/page_world":
-        return content_page_world()
+        return content_page_world(df = df,
+                                  opts_var_cases = opts_var_cases,
+                                  opts_var_deaths = opts_var_deaths,
+                                  opts_var_vaccinated = opts_var_vaccinated,
+                                  opts_scales = opts_scales)
     elif pathname == "/page_continent":
         return content_page_continent(opts_continents = opts_continents,
                                       opts_var_cases = opts_var_cases,

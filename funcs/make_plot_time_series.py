@@ -18,6 +18,8 @@ def make_plot_time_series(df, location_id, location_type, var, scale, opts_var):
         df_plot = df.loc[df["iso_code"] == location_id, [var, "date"]]
     if location_type == "continent":
         df_plot = df.loc[df["location"] == location_id, [var, "date"]]
+    if location_type == "world":
+        df_plot = df.loc[df["location"] == location_id, [var, "date"]]
 
     # Axes names:
     x_var_name = "Date"
