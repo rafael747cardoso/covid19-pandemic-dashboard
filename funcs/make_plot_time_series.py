@@ -1,7 +1,7 @@
 
 import plotly.graph_objects as go
 
-def make_plot_country_time_series(df, location_id, location_type, var, scale, opts_var):
+def make_plot_time_series(df, location_id, location_type, var, scale, opts_var):
     """
     Plot the time series of a variable for a country.
     param df: 

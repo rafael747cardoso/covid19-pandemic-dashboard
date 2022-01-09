@@ -29,8 +29,8 @@ from funcs.content_page_continent import content_page_continent
 from funcs.content_page_country import content_page_country
 from funcs.content_page_map import content_page_map
 from funcs.get_card_values import get_card_values
-from funcs.make_plot_country_time_series import make_plot_country_time_series
-from funcs.make_plot_country_trajectories import make_plot_country_trajectories
+from funcs.make_plot_time_series import make_plot_time_series
+from funcs.make_plot_trajectories import make_plot_trajectories
 
 # Display options:
 pd.set_option("display.width", 1200)
@@ -271,11 +271,80 @@ def update_continent_last_data_date(continent_name):
     last_date = "Dataset updated in " + last_date
     return(last_date)
 
+###### Plots
 
+### Time Series
 
+# Cases:
+@app.callback(
+    Output(component_id = "plot_continent_time_series_cases", component_property = "figure"),
+    [
+        Input(component_id = "chosen_continent", component_property = "value"),
+        Input(component_id = "chosen_var_continent_time_series_cases", component_property = "value"),
+        Input(component_id = "chosen_scale_continent_time_series_cases", component_property = "value")
+    ]
+)
+def update_plot_continent_time_series_cases(continent_name, var, scale):
+    return(make_plot_time_series(df = df,
+                                 location_id = continent_name,
+                                 location_type = "continent",
+                                 var = var,
+                                 scale = scale,
+                                 opts_var = opts_var_cases))
 
+# Deaths:
+@app.callback(
+    Output(component_id = "plot_continent_time_series_deaths", component_property = "figure"),
+    [
+        Input(component_id = "chosen_continent", component_property = "value"),
+        Input(component_id = "chosen_var_continent_time_series_deaths", component_property = "value"),
+        Input(component_id = "chosen_scale_continent_time_series_deaths", component_property = "value")
+    ]
+)
+def update_plot_continent_time_series_deaths(continent_name, var, scale):
+    return(make_plot_time_series(df = df,
+                                         location_id = continent_name,
+                                         location_type = "continent",
+                                         var = var,
+                                         scale = scale,
+                                         opts_var = opts_var_deaths))
 
+# Vaccinated:
+@app.callback(
+    Output(component_id = "plot_continent_time_series_vaccinated", component_property = "figure"),
+    [
+        Input(component_id = "chosen_continent", component_property = "value"),
+        Input(component_id = "chosen_var_continent_time_series_vaccinated", component_property = "value"),
+        Input(component_id = "chosen_scale_continent_time_series_vaccinated", component_property = "value")
+    ]
+)
+def update_plot_continent_time_series_vaccinated(continent_name, var, scale):
+    return(make_plot_time_series(df = df,
+                                         location_id = continent_name,
+                                         location_type = "continent",
+                                         var = var,
+                                         scale = scale,
+                                         opts_var = opts_var_vaccinated))
 
+### Trajectories
+
+@app.callback(
+    Output(component_id = "plot_continent_trajectories", component_property = "figure"),
+    [
+        Input(component_id = "chosen_var_continent_trajectories", component_property = "value"),
+        Input(component_id = "chosen_mov_avg_period_continent_trajectories", component_property = "value"),
+        Input(component_id = "chosen_continents_continent_trajectories", component_property = "value"),
+        Input(component_id = "chosen_scale_continent_trajectories", component_property = "value")
+    ]
+)
+def update_plot_continent_time_series_vaccinated(var, mov_avg_period, continents_names, scale):
+    return(make_plot_trajectories(df = df,
+                                  var = var,
+                                  mov_avg_period = mov_avg_period,
+                                  locations_id = continents_names,
+                                  locations_type = "continent",
+                                  scale = scale,
+                                  opts_var = opts_var_trajectories))
 
 ############ Country
 
@@ -453,12 +522,12 @@ def update_country_last_data_date(country_code):
     ]
 )
 def update_plot_country_time_series_cases(country_code, var, scale):
-    return(make_plot_country_time_series(df = df,
-                                         location_id = country_code,
-                                         location_type = "country",
-                                         var = var,
-                                         scale = scale,
-                                         opts_var = opts_var_cases))
+    return(make_plot_time_series(df = df,
+                                 location_id = country_code,
+                                 location_type = "country",
+                                 var = var,
+                                 scale = scale,
+                                 opts_var = opts_var_cases))
 
 # Deaths:
 @app.callback(
@@ -470,12 +539,12 @@ def update_plot_country_time_series_cases(country_code, var, scale):
     ]
 )
 def update_plot_country_time_series_deaths(country_code, var, scale):
-    return(make_plot_country_time_series(df = df,
-                                         location_id = country_code,
-                                         location_type = "country",
-                                         var = var,
-                                         scale = scale,
-                                         opts_var = opts_var_deaths))
+    return(make_plot_time_series(df = df,
+                                 location_id = country_code,
+                                 location_type = "country",
+                                 var = var,
+                                 scale = scale,
+                                 opts_var = opts_var_deaths))
 
 # Vaccinated:
 @app.callback(
@@ -487,12 +556,12 @@ def update_plot_country_time_series_deaths(country_code, var, scale):
     ]
 )
 def update_plot_country_time_series_vaccinated(country_code, var, scale):
-    return(make_plot_country_time_series(df = df,
-                                         location_id = country_code,
-                                         location_type = "country",
-                                         var = var,
-                                         scale = scale,
-                                         opts_var = opts_var_vaccinated))
+    return(make_plot_time_series(df = df,
+                                 location_id = country_code,
+                                 location_type = "country",
+                                 var = var,
+                                 scale = scale,
+                                 opts_var = opts_var_vaccinated))
 
 ### Trajectories
 
@@ -506,13 +575,13 @@ def update_plot_country_time_series_vaccinated(country_code, var, scale):
     ]
 )
 def update_plot_country_time_series_vaccinated(var, mov_avg_period, countries_codes, scale):
-    return(make_plot_country_trajectories(df = df,
-                                          var = var,
-                                          mov_avg_period = mov_avg_period,
-                                          locations_id = countries_codes,
-                                          locations_type = "country",
-                                          scale = scale,
-                                          opts_var = opts_var_trajectories))
+    return(make_plot_trajectories(df = df,
+                                  var = var,
+                                  mov_avg_period = mov_avg_period,
+                                  locations_id = countries_codes,
+                                  locations_type = "country",
+                                  scale = scale,
+                                  opts_var = opts_var_trajectories))
 
 ############ Map
 

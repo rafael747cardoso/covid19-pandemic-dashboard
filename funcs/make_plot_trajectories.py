@@ -3,7 +3,7 @@ import numpy as np
 import plotly.graph_objects as go
 from matplotlib.colors import LinearSegmentedColormap, to_hex
 
-def make_plot_country_trajectories(df, var, mov_avg_period, locations_id, locations_type, scale, opts_var):
+def make_plot_trajectories(df, var, mov_avg_period, locations_id, locations_type, scale, opts_var):
     """
     Plot the time series of a variable for a country.
     param df: 
