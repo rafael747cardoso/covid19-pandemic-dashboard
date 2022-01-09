@@ -839,9 +839,9 @@ def render_page_content(pathname):
 #----------------------------------------------------------------------------------------------------------------------
 ############################################## Run the dashboard ######################################################
 
-app.run_server(debug = True)
+# app.run_server(debug = True)
 
-# if __name__ == "__main__":
-#     app.run_server(debug = True)
+if __name__ == "__main__":
+    app.run_server(debug = True)
 
 
