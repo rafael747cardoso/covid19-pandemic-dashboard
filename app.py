@@ -157,12 +157,6 @@ def update_plot_world_time_series_vaccinated(var, scale):
                                  scale = scale,
                                  opts_var = opts_var_vaccinated))
 
-
-
-
-
-
-
 ############ Continent
 
 ###### Flag
@@ -805,13 +799,15 @@ def render_page_content(pathname):
                                   opts_var_cases = opts_var_cases,
                                   opts_var_deaths = opts_var_deaths,
                                   opts_var_vaccinated = opts_var_vaccinated,
-                                  opts_scales = opts_scales)
+                                  opts_scales = opts_scales,
+                                  country_codes = country_codes)
     elif pathname == "/page_world":
         return content_page_world(df = df,
                                   opts_var_cases = opts_var_cases,
                                   opts_var_deaths = opts_var_deaths,
                                   opts_var_vaccinated = opts_var_vaccinated,
-                                  opts_scales = opts_scales)
+                                  opts_scales = opts_scales,
+                                  country_codes = country_codes)
     elif pathname == "/page_continent":
         return content_page_continent(opts_continents = opts_continents,
                                       opts_var_cases = opts_var_cases,

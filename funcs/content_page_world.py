@@ -3,13 +3,15 @@ from dash import html, dcc
 import dash_bootstrap_components as dbc
 import base64
 from funcs.get_card_values import get_card_values
+from funcs.make_plot_infection_vaccination import make_plot_infection_vaccination
 
 def content_page_world(
         df,
         opts_var_cases,
         opts_var_deaths,
         opts_var_vaccinated,
-        opts_scales
+        opts_scales,
+        country_codes
 ):
     """
     Make the content for the World page.
@@ -17,6 +19,7 @@ def content_page_world(
     param opts_var_deaths:
     param opts_var_vaccinated:
     param opts_scales:
+    param country_codes:
     return: pg
     """
     
@@ -491,22 +494,10 @@ def content_page_world(
                                             [
                                                 html.Div(
                                                     [
-                                                        # Scale:
-                                                        html.Div(
-                                                            [
-                                                                dbc.RadioItems(
-                                                                    id = "chosen_scale_world_infection_vaccination",
-                                                                    options = opts_scales,
-                                                                    value = opts_scales[0]["value"],
-                                                                    inline = True
-                                                                )
-                                                            ],
-                                                            className = "radio-check-scale"
-                                                        ),
-                                                        # Plot:
                                                         dcc.Graph(
                                                             id = "plot_world_infection_vaccination",
-                                                            figure = {}
+                                                            figure = make_plot_infection_vaccination(df = df,
+                                                                                                     country_codes = country_codes)
                                                         )
                                                     ],
                                                     className = "card-plot"
