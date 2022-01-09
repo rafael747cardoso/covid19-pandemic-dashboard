@@ -16,6 +16,8 @@ def content_page_continent(
     Make the content for the Continent page.
     param opts_continents:
     param opts_var_cases:
+    param opts_var_deaths:
+    param opts_var_vaccinated:
     param opts_scales:
     param opts_var_trajectories:
     param opts_mov_avg_period:

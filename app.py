@@ -105,6 +105,155 @@ server = app.server
 
 ############ World
 
+###### Cards
+
+# Card world total cases:
+@app.callback(
+    [
+        Output(component_id = "card_world_total_cases", component_property = "children"),
+        Output(component_id = "card_world_total_cases_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_world_total_cases(dummy_var):
+    return(get_card_values(df = df,
+                           var = "cases_total",
+                           location_id = dummy_var,
+                           location_type = "world"))
+
+# Card world total deaths:
+@app.callback(
+    [
+        Output(component_id = "card_world_total_deaths", component_property = "children"),
+        Output(component_id = "card_world_total_deaths_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_world_total_deaths(dummy_var):
+    return(get_card_values(df = df,
+                           var = "deaths_total",
+                           location_id = dummy_var,
+                           location_type = "world"))
+
+# Card world fully vaccinated:
+@app.callback(
+    [
+        Output(component_id = "card_world_fully_vaccinated", component_property = "children"),
+        Output(component_id = "card_world_fully_vaccinated_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_world_fully_vaccinated(dummy_var):
+    return(get_card_values(df = df,
+                           var = "vaccinated_fully",
+                           location_id = dummy_var,
+                           location_type = "world"))
+
+# Card world population:
+@app.callback(
+    [
+        Output(component_id = "card_world_population", component_property = "children"),
+        Output(component_id = "card_world_population_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_world_population(dummy_var):
+    return(get_card_values(df = df,
+                           var = "population",
+                           location_id = dummy_var,
+                           location_type = "world"))
+
+# Card world new cases:
+@app.callback(
+    [
+        Output(component_id = "card_world_new_cases", component_property = "children"),
+        Output(component_id = "card_world_new_cases_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_world_new_cases(dummy_var):
+    return(get_card_values(df = df,
+                           var = "cases_new",
+                           location_id = dummy_var,
+                           location_type = "world"))
+
+# Card world new deaths:
+@app.callback(
+    [
+        Output(component_id = "card_world_new_deaths", component_property = "children"),
+        Output(component_id = "card_world_new_deaths_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_world_new_deaths(dummy_var):
+    return(get_card_values(df = df,
+                           var = "deaths_new",
+                           location_id = dummy_var,
+                           location_type = "world"))
+
+# Card world percent of fully vaccinated:
+@app.callback(
+    [
+        Output(component_id = "card_world_pct_fully_vaccinated", component_property = "children"),
+        Output(component_id = "card_world_pct_fully_vaccinated_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_world_pct_fully_vaccinated(dummy_var):
+    return(get_card_values(df = df,
+                           var = "vaccinated_fully_pct",
+                           location_id = dummy_var,
+                           location_type = "world"))
+
+# Card world gdp_per_capita:
+@app.callback(
+    [
+        Output(component_id = "card_world_gdp_per_capita", component_property = "children"),
+        Output(component_id = "card_world_gdp_per_capita_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_world_gdp_per_capita(dummy_var):
+    return(get_card_values(df = df,
+                           var = "gdp_per_capita",
+                           location_id = dummy_var,
+                           location_type = "world"))
+
+# Last data date:
+@app.callback(
+    Output(component_id = "world_last_data_date", component_property = "children"),
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_world_last_data_date(dummy_var):
+    last_date = df.loc[df["location"] == "World", "date"].iloc[-1]
+    last_date = last_date[8:10] + "/" + last_date[5:7] + "/" + last_date[0:4]
+    last_date = "Dataset updated in " + last_date
+    return(last_date)
+
+
+
+
+
+
+
 
 
 
@@ -171,7 +320,7 @@ def update_card_continent_total_deaths(continent_name):
         Input(component_id = "chosen_continent", component_property = "value")
     ]
 )
-def update_card_country_fully_vaccinated(continent_name):
+def update_card_continent_fully_vaccinated(continent_name):
     return(get_card_values(df = df,
                            var = "vaccinated_fully",
                            location_id = continent_name,
@@ -187,7 +336,7 @@ def update_card_country_fully_vaccinated(continent_name):
         Input(component_id = "chosen_continent", component_property = "value")
     ]
 )
-def update_card_country_population(continent_name):
+def update_card_continent_population(continent_name):
     return(get_card_values(df = df,
                            var = "population",
                            location_id = continent_name,
@@ -203,7 +352,7 @@ def update_card_country_population(continent_name):
         Input(component_id = "chosen_continent", component_property = "value")
     ]
 )
-def update_card_country_new_cases(continent_name):
+def update_card_continent_new_cases(continent_name):
     return(get_card_values(df = df,
                            var = "cases_new",
                            location_id = continent_name,
@@ -219,7 +368,7 @@ def update_card_country_new_cases(continent_name):
         Input(component_id = "chosen_continent", component_property = "value")
     ]
 )
-def update_card_country_new_deaths(continent_name):
+def update_card_continent_new_deaths(continent_name):
     return(get_card_values(df = df,
                            var = "deaths_new",
                            location_id = continent_name,
@@ -235,7 +384,7 @@ def update_card_country_new_deaths(continent_name):
         Input(component_id = "chosen_continent", component_property = "value")
     ]
 )
-def update_card_country_pct_fully_vaccinated(continent_name):
+def update_card_continent_pct_fully_vaccinated(continent_name):
     return(get_card_values(df = df,
                            var = "vaccinated_fully_pct",
                            location_id = continent_name,
@@ -251,7 +400,7 @@ def update_card_country_pct_fully_vaccinated(continent_name):
         Input(component_id = "chosen_continent", component_property = "value")
     ]
 )
-def update_card_country_gdp_per_capita(continent_name):
+def update_card_continent_gdp_per_capita(continent_name):
     return(get_card_values(df = df,
                            var = "gdp_per_capita",
                            location_id = continent_name,

@@ -16,6 +16,8 @@ def content_page_country(
     Make the content for the Country page.
     param opts_countries:
     param opts_var_cases:
+    param opts_var_deaths:
+    param opts_var_vaccinated:
     param opts_scales:
     param opts_var_trajectories:
     param opts_mov_avg_period:
