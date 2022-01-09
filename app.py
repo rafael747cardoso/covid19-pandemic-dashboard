@@ -43,7 +43,6 @@ pd.set_option("display.max_rows", 300)
 # Data extraction from source:
 df = get_data()
 
-
 # Select options:
 df_countries = df[df["iso_code"].str.contains("OWID") == False]
 country_names = df_countries["location"].unique().tolist()
