@@ -3,7 +3,7 @@
 
 ## Dashboard
 
-app link
+https://covid19-pandemic-dashboard.herokuapp.com/
 
 A dashboard to show the Covid-19 pandemic and the vaccination evort throughout the world.
 
