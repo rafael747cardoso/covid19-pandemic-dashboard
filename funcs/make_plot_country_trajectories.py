@@ -3,21 +3,26 @@ import numpy as np
 import plotly.graph_objects as go
 from matplotlib.colors import LinearSegmentedColormap, to_hex
 
-def make_plot_country_trajectories(df, var, mov_avg_period, countries_codes, scale, opts_var):
+def make_plot_country_trajectories(df, var, mov_avg_period, locations_id, locations_type, scale, opts_var):
     """
     Plot the time series of a variable for a country.
     param df: 
     param var: 
     param mov_avg_period:
-    param countries_codes: 
+    param locations_id: 
+    param locations_type: 
     param scale: 
     param opts_var:
     return: fig
     """
     
     # Filter the data:
-    df_plot = df.loc[df["iso_code"].isin(countries_codes), 
-                     ["iso_code", "location", "date", var + "_new", var + "_total"]]
+    if locations_type == "country":
+        df_plot = df.loc[df["iso_code"].isin(locations_id),
+                         ["iso_code", "location", "date", var + "_new", var + "_total"]]
+    if locations_type == "continent":
+        df_plot = df.loc[df["location"].isin(locations_id),
+                         ["location", "date", var + "_new", var + "_total"]]
 
     # Axes names:
     var_name = [opts_var[i]["label"] for i in range(len(opts_var)) if opts_var[i]["value"] == var][0]
@@ -25,22 +30,26 @@ def make_plot_country_trajectories(df, var, mov_avg_period, countries_codes, sca
     y_var_name = "New " + var_name
     
     # Plot:
-    n_colors = len(countries_codes)
+    lvls = locations_id
+    n_colors = len(lvls)
     my_colors = ["#F64011", "#F69111", "#F6F511", "#9FF611", "#11F6E0", "#DF11F6"]
     cmap = LinearSegmentedColormap.from_list("my_palette", my_colors)
     my_palette = [to_hex(j) for j in [cmap(i / n_colors) for i in np.array(range(n_colors))]]
     fig = go.Figure()
-    lvls = countries_codes
     for l, lvl in enumerate(lvls):
         # Filter the country:
-        country_name = df_plot["location"][df_plot["iso_code"] == lvl].iloc[0]
-        df_country = df_plot[df_plot["iso_code"] == lvl]
-        
+        if locations_type == "country":
+            location_name = df_plot["location"][df_plot["iso_code"] == lvl].iloc[0]
+            df_location = df_plot[df_plot["iso_code"] == lvl]
+        if locations_type == "continent":
+            location_name = df_plot["location"][df_plot["location"] == lvl].iloc[0]
+            df_location = df_plot[df_plot["location"] == lvl]
+
         # Add the moving average:
         mov_avg_period = int(mov_avg_period)
-        X = df_country[var + "_total"].values
+        X = df_location[var + "_total"].values
         X = [np.mean(X[i:(i + mov_avg_period)]) for i in range(0, len(X) - mov_avg_period, 1)]
-        Y = df_country[var + "_new"].values
+        Y = df_location[var + "_new"].values
         Y = [np.mean(Y[i:(i + mov_avg_period)]) for i in range(0, len(Y) - mov_avg_period, 1)]
         
         # Plot the trace:
@@ -53,11 +62,11 @@ def make_plot_country_trajectories(df, var, mov_avg_period, countries_codes, sca
                     "width": 3,
                     "color": my_palette[l]
                 },
-                text = df_country["date"],
-                name = country_name,
-                hovertemplate = "<b>" + x_var_name + ": %{x:,.0f}<br>" +
+                text = df_location["date"],
+                name = location_name,
+                hovertemplate = "<b>" + location_name + "<br>" +
+                                        x_var_name + ": %{x:,.0f}<br>" +
                                         y_var_name + ": %{y:,.0f}<br>" +
-                                        "Country: " + country_name + "<br>"
                                         "Date: %{text}" + 
                                         "</b><extra></extra>"
             )

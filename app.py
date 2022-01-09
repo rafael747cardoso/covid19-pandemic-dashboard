@@ -85,6 +85,10 @@ opts_mov_avg_period = [
     {"label": "14 days", "value": "14"},
     {"label": "30 days", "value": "30"}
 ]
+continents = df["continent"].dropna().unique().tolist()
+continents.sort()
+opts_continents = [{"label": i, "value": i} for i in continents]
+
 
 
 #----------------------------------------------------------------------------------------------------------------------
@@ -107,7 +111,165 @@ server = app.server
 
 ############ Continent
 
+###### Flag
 
+# Image of the country's flag:
+@app.callback(
+    Output(component_id = "continent_flag", component_property = "src"),
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_continent_flag(continent_name):
+    try:
+        flag_continent = base64.b64encode(open("figs/flags/" + continent_name + ".png", "rb").read())
+        flag_continent_encoded = "data:image/png;base64,{}".format(flag_continent.decode())
+        return (flag_continent_encoded)
+    except (Exception,):
+        return("")
+
+###### Cards
+
+# Card continent total cases:
+@app.callback(
+    [
+        Output(component_id = "card_continent_total_cases", component_property = "children"),
+        Output(component_id = "card_continent_total_cases_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_continent_total_cases(continent_name):
+    return(get_card_values(df = df,
+                           var = "cases_total",
+                           location_id = continent_name,
+                           location_type = "continent"))
+
+# Card continent total deaths:
+@app.callback(
+    [
+        Output(component_id = "card_continent_total_deaths", component_property = "children"),
+        Output(component_id = "card_continent_total_deaths_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_continent_total_deaths(continent_name):
+    return(get_card_values(df = df,
+                           var = "deaths_total",
+                           location_id = continent_name,
+                           location_type = "continent"))
+
+# Card continent fully vaccinated:
+@app.callback(
+    [
+        Output(component_id = "card_continent_fully_vaccinated", component_property = "children"),
+        Output(component_id = "card_continent_fully_vaccinated_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_country_fully_vaccinated(continent_name):
+    return(get_card_values(df = df,
+                           var = "vaccinated_fully",
+                           location_id = continent_name,
+                           location_type = "continent"))
+
+# Card continent population:
+@app.callback(
+    [
+        Output(component_id = "card_continent_population", component_property = "children"),
+        Output(component_id = "card_continent_population_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_country_population(continent_name):
+    return(get_card_values(df = df,
+                           var = "population",
+                           location_id = continent_name,
+                           location_type = "continent"))
+
+# Card continent new cases:
+@app.callback(
+    [
+        Output(component_id = "card_continent_new_cases", component_property = "children"),
+        Output(component_id = "card_continent_new_cases_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_country_new_cases(continent_name):
+    return(get_card_values(df = df,
+                           var = "cases_new",
+                           location_id = continent_name,
+                           location_type = "continent"))
+
+# Card continent new deaths:
+@app.callback(
+    [
+        Output(component_id = "card_continent_new_deaths", component_property = "children"),
+        Output(component_id = "card_continent_new_deaths_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_country_new_deaths(continent_name):
+    return(get_card_values(df = df,
+                           var = "deaths_new",
+                           location_id = continent_name,
+                           location_type = "continent"))
+
+# Card continent percent of fully vaccinated:
+@app.callback(
+    [
+        Output(component_id = "card_continent_pct_fully_vaccinated", component_property = "children"),
+        Output(component_id = "card_continent_pct_fully_vaccinated_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_country_pct_fully_vaccinated(continent_name):
+    return(get_card_values(df = df,
+                           var = "vaccinated_fully_pct",
+                           location_id = continent_name,
+                           location_type = "continent"))
+
+# Card continent gdp_per_capita:
+@app.callback(
+    [
+        Output(component_id = "card_continent_gdp_per_capita", component_property = "children"),
+        Output(component_id = "card_continent_gdp_per_capita_last_date", component_property = "children"),
+    ],
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_card_country_gdp_per_capita(continent_name):
+    return(get_card_values(df = df,
+                           var = "gdp_per_capita",
+                           location_id = continent_name,
+                           location_type = "continent"))
+
+# Last data date:
+@app.callback(
+    Output(component_id = "continent_last_data_date", component_property = "children"),
+    [
+        Input(component_id = "chosen_continent", component_property = "value")
+    ]
+)
+def update_continent_last_data_date(continent_name):
+    last_date = df.loc[df["location"] == continent_name, "date"].iloc[-1]
+    last_date = last_date[8:10] + "/" + last_date[5:7] + "/" + last_date[0:4]
+    last_date = "Dataset updated in " + last_date
+    return(last_date)
 
 
 
@@ -149,7 +311,8 @@ def update_country_flag(country_code):
 def update_card_country_total_cases(country_code):
     return(get_card_values(df = df,
                            var = "cases_total",
-                           country_code = country_code))
+                           location_id = country_code,
+                           location_type = "country"))
 
 # Card country total deaths:
 @app.callback(
@@ -164,7 +327,8 @@ def update_card_country_total_cases(country_code):
 def update_card_country_total_deaths(country_code):
     return(get_card_values(df = df,
                            var = "deaths_total",
-                           country_code = country_code))
+                           location_id = country_code,
+                           location_type = "country"))
 
 # Card country fully vaccinated:
 @app.callback(
@@ -179,7 +343,8 @@ def update_card_country_total_deaths(country_code):
 def update_card_country_fully_vaccinated(country_code):
     return(get_card_values(df = df,
                            var = "vaccinated_fully",
-                           country_code = country_code))
+                           location_id = country_code,
+                           location_type = "country"))
 
 # Card country population:
 @app.callback(
@@ -194,7 +359,8 @@ def update_card_country_fully_vaccinated(country_code):
 def update_card_country_population(country_code):
     return(get_card_values(df = df,
                            var = "population",
-                           country_code = country_code))
+                           location_id = country_code,
+                           location_type = "country"))
 
 # Card country new cases:
 @app.callback(
@@ -209,7 +375,8 @@ def update_card_country_population(country_code):
 def update_card_country_new_cases(country_code):
     return(get_card_values(df = df,
                            var = "cases_new",
-                           country_code = country_code))
+                           location_id = country_code,
+                           location_type = "country"))
 
 # Card country new deaths:
 @app.callback(
@@ -224,7 +391,8 @@ def update_card_country_new_cases(country_code):
 def update_card_country_new_deaths(country_code):
     return(get_card_values(df = df,
                            var = "deaths_new",
-                           country_code = country_code))
+                           location_id = country_code,
+                           location_type = "country"))
 
 # Card country percent of fully vaccinated:
 @app.callback(
@@ -238,8 +406,9 @@ def update_card_country_new_deaths(country_code):
 )
 def update_card_country_pct_fully_vaccinated(country_code):
     return(get_card_values(df = df,
-                                   var = "vaccinated_fully_pct",
-                                   country_code = country_code))
+                           var = "vaccinated_fully_pct",
+                           location_id = country_code,
+                           location_type = "country"))
 
 # Card country gdp_per_capita:
 @app.callback(
@@ -254,16 +423,17 @@ def update_card_country_pct_fully_vaccinated(country_code):
 def update_card_country_gdp_per_capita(country_code):
     return(get_card_values(df = df,
                            var = "gdp_per_capita",
-                           country_code = country_code))
+                           location_id = country_code,
+                           location_type = "country"))
 
 # Last data date:
 @app.callback(
-    Output(component_id = "last_data_date", component_property = "children"),
+    Output(component_id = "country_last_data_date", component_property = "children"),
     [
         Input(component_id = "chosen_country", component_property = "value")
     ]
 )
-def update_last_data_date(country_code):
+def update_country_last_data_date(country_code):
     last_date = df.loc[df["iso_code"] == country_code, "date"].iloc[-1]
     last_date = last_date[8:10] + "/" + last_date[5:7] + "/" + last_date[0:4]
     last_date = "Dataset updated in " + last_date
@@ -284,7 +454,8 @@ def update_last_data_date(country_code):
 )
 def update_plot_country_time_series_cases(country_code, var, scale):
     return(make_plot_country_time_series(df = df,
-                                         country_code = country_code,
+                                         location_id = country_code,
+                                         location_type = "country",
                                          var = var,
                                          scale = scale,
                                          opts_var = opts_var_cases))
@@ -300,7 +471,8 @@ def update_plot_country_time_series_cases(country_code, var, scale):
 )
 def update_plot_country_time_series_deaths(country_code, var, scale):
     return(make_plot_country_time_series(df = df,
-                                         country_code = country_code,
+                                         location_id = country_code,
+                                         location_type = "country",
                                          var = var,
                                          scale = scale,
                                          opts_var = opts_var_deaths))
@@ -316,7 +488,8 @@ def update_plot_country_time_series_deaths(country_code, var, scale):
 )
 def update_plot_country_time_series_vaccinated(country_code, var, scale):
     return(make_plot_country_time_series(df = df,
-                                         country_code = country_code,
+                                         location_id = country_code,
+                                         location_type = "country",
                                          var = var,
                                          scale = scale,
                                          opts_var = opts_var_vaccinated))
@@ -336,7 +509,8 @@ def update_plot_country_time_series_vaccinated(var, mov_avg_period, countries_co
     return(make_plot_country_trajectories(df = df,
                                           var = var,
                                           mov_avg_period = mov_avg_period,
-                                          countries_codes = countries_codes,
+                                          locations_id = countries_codes,
+                                          locations_type = "country",
                                           scale = scale,
                                           opts_var = opts_var_trajectories))
 
@@ -508,7 +682,13 @@ def render_page_content(pathname):
     elif pathname == "/page_world":
         return content_page_world()
     elif pathname == "/page_continent":
-        return content_page_continent()
+        return content_page_continent(opts_continents = opts_continents,
+                                      opts_var_cases = opts_var_cases,
+                                      opts_var_deaths = opts_var_deaths,
+                                      opts_var_vaccinated = opts_var_vaccinated,
+                                      opts_scales = opts_scales,
+                                      opts_var_trajectories = opts_var_trajectories,
+                                      opts_mov_avg_period = opts_mov_avg_period)
     elif pathname == "/page_country":
         return content_page_country(opts_countries = opts_countries,
                                     opts_var_cases = opts_var_cases,

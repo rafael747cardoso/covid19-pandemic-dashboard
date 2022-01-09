@@ -1,7 +1,7 @@
 
 import numpy as np
 
-def get_card_values(df, var, country_code):
+def get_card_values(df, var, location_id, location_type):
     """
     Filter the dataframe to take the last data and date of the variable.
     param df: 
@@ -10,7 +10,10 @@ def get_card_values(df, var, country_code):
     """
 
     # Take the last valid data:
-    df_last = df.loc[df["iso_code"] == country_code, ["date", var]].dropna().tail(1)
+    if location_type == "country":
+        df_last = df.loc[df["iso_code"] == location_id, ["date", var]].dropna().tail(1)
+    if location_type == "continent":
+        df_last = df.loc[df["location"] == location_id, ["date", var]].dropna().tail(1)
     if df_last.shape[0] == 0:
         x = "-"
         last_date = "-"

@@ -1,11 +1,12 @@
 
 import plotly.graph_objects as go
 
-def make_plot_country_time_series(df, country_code, var, scale, opts_var):
+def make_plot_country_time_series(df, location_id, location_type, var, scale, opts_var):
     """
     Plot the time series of a variable for a country.
     param df: 
-    param country_code: 
+    param location_id: 
+    param location_type: 
     param var: 
     param scale: 
     param opts_var:
@@ -13,8 +14,11 @@ def make_plot_country_time_series(df, country_code, var, scale, opts_var):
     """
     
     # Filter the data:
-    df_plot = df.loc[df["iso_code"] == country_code, [var, "date"]]
-    
+    if location_type == "country":
+        df_plot = df.loc[df["iso_code"] == location_id, [var, "date"]]
+    if location_type == "continent":
+        df_plot = df.loc[df["location"] == location_id, [var, "date"]]
+
     # Axes names:
     x_var_name = "Date"
     y_var_name = [opts_var[i]["label"] for i in range(len(opts_var)) if opts_var[i]["value"] == var][0]

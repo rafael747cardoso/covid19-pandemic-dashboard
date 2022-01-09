@@ -284,7 +284,7 @@ def content_page_country(
                             [
                                 html.Div(
                                     [],
-                                    id = "last_data_date",
+                                    id = "country_last_data_date",
                                     className = "last-data-date"
                                 )
                             ],
@@ -505,7 +505,7 @@ def content_page_country(
                                             ],
                                             width = 4
                                         ),
-                                        # Country:
+                                        # Countries:
                                         dbc.Col(
                                             [
                                                 html.Div(
